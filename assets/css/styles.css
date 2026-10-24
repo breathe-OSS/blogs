@@ -577,13 +577,13 @@ img {
   transition:
     background var(--motion-press) var(--motion-easing-standard),
     color var(--motion-press) var(--motion-easing-standard),
-    border-radius var(--motion-shape) var(--motion-spring-spatial),
+    border-radius var(--motion-shape) var(--motion-easing-emphasized),
     transform var(--motion-squish) var(--motion-spring-squish);
 }
 .social-btn:hover {
   background: var(--primary);
   color: var(--on-primary);
-  border-radius: var(--shape-corner-full);
+  border-radius: 20px;
 }
 .social-btn:active {
   transform: scale(0.9);
@@ -670,12 +670,12 @@ img {
     background var(--motion-press) var(--motion-easing-standard),
     color var(--motion-press) var(--motion-easing-standard),
     border-color var(--motion-press) var(--motion-easing-standard),
-    border-radius var(--motion-shape) var(--motion-spring-spatial);
+    border-radius var(--motion-shape) var(--motion-easing-emphasized);
 }
 .chip:hover {
   background: var(--primary-container);
   border-color: transparent;
-  border-radius: var(--shape-corner-full);
+  border-radius: 16px;
   color: var(--primary);
 }
 
