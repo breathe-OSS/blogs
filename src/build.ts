@@ -230,6 +230,10 @@ async function emit(path: string, contents: string): Promise<void> {
   await writeFile(target, contents);
 }
 
+function absoluteUrls(html: string): string {
+  return html.replace(/(src|href)="\/(?!\/)/g, `$1="${SITE.url}/`);
+}
+
 function rss(posts: Post[]): string {
   const items = posts
     .map((post) => {
@@ -245,7 +249,7 @@ function rss(posts: Post[]): string {
       <dc:creator>${esc(post.author)}</dc:creator>
       <description>${esc(post.description)}</description>
       ${categories}
-      <content:encoded><![CDATA[${post.feedHtml.replace(/]]>/g, ']]]]><![CDATA[>')}]]></content:encoded>
+      <content:encoded><![CDATA[${absoluteUrls(post.feedHtml).replace(/]]>/g, ']]]]><![CDATA[>')}]]></content:encoded>
     </item>`;
     })
     .join('\n');
