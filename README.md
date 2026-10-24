@@ -37,6 +37,15 @@ Only `title`, `description` and `published` are required. Put images in `public/
 <img class="only-light" src="/images/posts/my-post/chart-light.png" alt="What the chart shows" />
 ```
 
+For a photo with a caption and credit:
+
+```html
+<figure>
+<img src="/images/posts/my-post/photo.jpg" alt="What the photo shows" />
+<figcaption>What is happening. Photo by Name for <a href="https://example.com">Source</a>.</figcaption>
+</figure>
+```
+
 Posts with `draft: true` show up in `npm run dev` but are left out of `npm run build`.
 
 ## Commands
