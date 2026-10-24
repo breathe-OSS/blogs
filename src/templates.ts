@@ -354,8 +354,11 @@ export function emptyList(): string {
 }
 
 export function postPage(post: Post, newer?: Post, older?: Post): string {
+  const caption = post.coverCaption
+    ? `<figcaption class="article-cover-caption">${esc(post.coverCaption)}</figcaption>`
+    : '';
   const cover = post.cover
-    ? `<div class="article-cover"><img src="${post.cover}" alt="" /></div>`
+    ? `<figure class="article-cover-figure"><div class="article-cover"><img src="${post.cover}" alt="" /></div>${caption}</figure>`
     : '';
   const nav: string[] = [];
   if (newer) {

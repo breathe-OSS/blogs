@@ -160,6 +160,8 @@ async function loadPosts(includeDrafts: boolean): Promise<Post[]> {
       tags,
       author: typeof data.author === 'string' && data.author ? data.author : SITE.name,
       cover: typeof data.cover === 'string' && data.cover ? data.cover : undefined,
+      coverCaption:
+        typeof data.coverCaption === 'string' && data.coverCaption ? data.coverCaption : undefined,
       draft,
       html,
       headings,

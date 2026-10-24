@@ -37,6 +37,7 @@ export interface Post {
   tags: string[];
   author: string;
   cover?: string;
+  coverCaption?: string;
   draft: boolean;
   html: string;
   headings: Heading[];

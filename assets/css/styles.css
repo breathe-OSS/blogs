@@ -906,6 +906,19 @@ img {
 .article-cover img {
   width: 100%;
 }
+.article-cover-figure {
+  margin: 0 0 28px;
+}
+.article-cover-figure .article-cover {
+  margin-bottom: 0;
+}
+.article-cover-caption {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--on-surface-variant);
+}
 .divider {
   margin: 24px 0 28px;
   border: none;

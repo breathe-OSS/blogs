@@ -24,6 +24,7 @@ category: Sensors
 tags: [airgradient, hardware]
 author: sidharthify
 cover: /images/posts/my-post/cover.webp
+coverCaption: What the cover shows. Image: who made it.
 draft: false
 ---
 
