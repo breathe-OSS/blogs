@@ -42,10 +42,44 @@ For a photo with a caption and credit:
 
 ```html
 <figure>
-<img src="/images/posts/my-post/photo.jpg" alt="What the photo shows" />
-<figcaption>What is happening. Photo by Name for <a href="https://example.com">Source</a>.</figcaption>
+  <img src="/images/posts/my-post/photo.jpg" alt="What the photo shows" />
+  <figcaption>
+    What is happening. Photo by Name for <a href="https://example.com">Source</a>.
+  </figcaption>
 </figure>
 ```
+
+For an interactive chart, put its data in `public/data/` as JSON and add one line where it should appear:
+
+```html
+<div class="chart" data-src="/data/my-post/chart.json"></div>
+```
+
+The build turns it into an SVG chart that follows the site theme, with a hover tooltip, a data table and a download link. The JSON describes the chart:
+
+```json
+{
+  "kind": "line",
+  "layout": "single",
+  "title": "Daily average PM2.5",
+  "subtitle": "One line about what the chart shows.",
+  "unit": "µg/m³",
+  "yLabel": "PM2.5 (µg/m³)",
+  "categories": true,
+  "legend": [{ "name": "Jammu", "color": "jammu", "style": "solid" }],
+  "x": { "labels": ["10 Sep 2026", "11 Sep 2026"], "ticks": [[0, "10 Sep"]] },
+  "panels": [
+    {
+      "yMax": 125,
+      "series": [{ "name": "Jammu", "color": "jammu", "style": "solid", "values": [51.2, 62.1] }],
+      "marks": [{ "series": 0, "index": 1, "label": "Jammu 62" }]
+    }
+  ],
+  "fallback": "/images/posts/my-post/chart.png"
+}
+```
+
+`kind` is `line` or `bar`. `layout` is `single`, `rows` or `columns` when there is more than one panel. `color` is `jammu`, `srinagar` or `muted`, and `style` is `solid`, `dashed` or `faint`. Bar panels can add `valueLabels` as `[series, index]` pairs. The `fallback` image is used in the RSS feed, where charts can't run.
 
 Posts with `draft: true` show up in `npm run dev` but are left out of `npm run build`.
 

@@ -338,6 +338,246 @@ function initReadProgress(): void {
   update();
 }
 
+interface ChartSeriesData {
+  name: string;
+  color: string;
+  values: (number | null)[];
+}
+
+interface ChartData {
+  kind: 'line' | 'bar';
+  unit: string;
+  categories: boolean;
+  labels: string[];
+  panels: { title: string | null; yMax: number; series: ChartSeriesData[] }[];
+}
+
+interface ChartOverlay {
+  plot: HTMLElement;
+  crosshair: HTMLElement;
+  tooltip: HTMLElement;
+  dots: HTMLElement[];
+}
+
+const EPA_CATEGORIES: [number, string][] = [
+  [9, 'Good'],
+  [35.4, 'Moderate'],
+  [55.4, 'Unhealthy for sensitive groups'],
+  [125.4, 'Unhealthy'],
+  [225.4, 'Very unhealthy'],
+];
+
+function epaCategory(value: number): string {
+  for (const [limit, label] of EPA_CATEGORIES) {
+    if (value <= limit) {
+      return label;
+    }
+  }
+  return 'Hazardous';
+}
+
+function chartColor(color: string): string {
+  if (color === 'muted') {
+    return 'var(--on-surface-variant)';
+  }
+  return `var(--chart-${color})`;
+}
+
+function element(tag: string, className: string, text?: string): HTMLElement {
+  const node = document.createElement(tag);
+  node.className = className;
+  if (text !== undefined) {
+    node.textContent = text;
+  }
+  return node;
+}
+
+function tooltipContent(data: ChartData, panelIndex: number, index: number): HTMLElement[] {
+  const panel = data.panels[panelIndex];
+  const heading = panel.title ? `${panel.title}, ${data.labels[index]}` : data.labels[index];
+  const nodes: HTMLElement[] = [element('div', 'chart-tooltip-title', heading)];
+  const categories: string[] = [];
+
+  for (const series of panel.series) {
+    const value = series.values[index];
+    const row = element('div', 'chart-tooltip-row');
+    const swatch = element('span', 'chart-swatch');
+    swatch.style.setProperty('--c', chartColor(series.color));
+    row.append(swatch, element('span', '', series.name));
+    const text =
+      value === null || value === undefined ? 'no data' : `${value.toFixed(1)} ${data.unit}`;
+    row.append(element('span', 'chart-tooltip-value', text));
+    nodes.push(row);
+
+    if (data.categories && value !== null && value !== undefined) {
+      const prefix = panel.series.length > 1 ? `${series.name}: ` : '';
+      categories.push(`${prefix}${epaCategory(value)}`);
+    }
+  }
+
+  if (categories.length > 0) {
+    nodes.push(element('div', 'chart-tooltip-category', categories.join(' · ')));
+  }
+  return nodes;
+}
+
+function initCharts(): void {
+  for (const figure of document.querySelectorAll<HTMLElement>('figure.chart')) {
+    const script = figure.querySelector('script.chart-data');
+    if (!script || !script.textContent) {
+      continue;
+    }
+
+    const data = JSON.parse(script.textContent) as ChartData;
+    const count = data.labels.length;
+    const banded = data.categories || data.kind === 'bar';
+    const bars = Array.from(figure.querySelectorAll<SVGElement>('.chart-bar'));
+    const overlays: ChartOverlay[] = Array.from(
+      figure.querySelectorAll<HTMLElement>('.chart-plot')
+    ).map((plot) => {
+      const crosshair = element('div', 'chart-crosshair');
+      const tooltip = element('div', 'chart-tooltip');
+      crosshair.hidden = true;
+      tooltip.hidden = true;
+      tooltip.setAttribute('role', 'status');
+      plot.append(crosshair, tooltip);
+      return { plot, crosshair, tooltip, dots: [] };
+    });
+    let current = -1;
+
+    const position = (index: number): number => {
+      if (banded) {
+        return ((index + 0.5) / count) * 100;
+      }
+      if (count <= 1) {
+        return 50;
+      }
+      return (index / (count - 1)) * 100;
+    };
+
+    const indexAt = (plot: HTMLElement, clientX: number): number => {
+      const rect = plot.getBoundingClientRect();
+      const fraction = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+      if (banded) {
+        return Math.min(count - 1, Math.floor(fraction * count));
+      }
+      return Math.round(fraction * (count - 1));
+    };
+
+    const clearDots = (overlay: ChartOverlay): void => {
+      for (const dot of overlay.dots) {
+        dot.remove();
+      }
+      overlay.dots.length = 0;
+    };
+
+    const hide = (): void => {
+      current = -1;
+      figure.classList.remove('is-active');
+      for (const bar of bars) {
+        bar.classList.remove('is-current');
+      }
+      for (const overlay of overlays) {
+        overlay.crosshair.hidden = true;
+        overlay.tooltip.hidden = true;
+        clearDots(overlay);
+      }
+    };
+
+    const show = (index: number, activePanel: number): void => {
+      current = index;
+      const left = position(index);
+      figure.classList.toggle('is-active', data.kind === 'bar');
+      for (const bar of bars) {
+        bar.classList.toggle('is-current', bar.getAttribute('data-i') === String(index));
+      }
+
+      overlays.forEach((overlay, panelIndex) => {
+        const panel = data.panels[panelIndex];
+        clearDots(overlay);
+
+        if (data.kind === 'line') {
+          overlay.crosshair.hidden = false;
+          overlay.crosshair.style.left = `${left}%`;
+          for (const series of panel.series) {
+            const value = series.values[index];
+            if (value === null || value === undefined) {
+              continue;
+            }
+            const dot = element('span', 'chart-dot');
+            dot.style.left = `${left}%`;
+            dot.style.top = `${100 - (Math.min(value, panel.yMax) / panel.yMax) * 100}%`;
+            dot.style.setProperty('--c', chartColor(series.color));
+            overlay.plot.append(dot);
+            overlay.dots.push(dot);
+          }
+        }
+
+        if (panelIndex !== activePanel) {
+          overlay.tooltip.hidden = true;
+          return;
+        }
+
+        overlay.tooltip.replaceChildren(...tooltipContent(data, panelIndex, index));
+        overlay.tooltip.hidden = false;
+        const plotWidth = overlay.plot.clientWidth;
+        const tooltipWidth = overlay.tooltip.offsetWidth;
+        const x = (left / 100) * plotWidth;
+        let offset = x + 12;
+        if (offset + tooltipWidth > plotWidth) {
+          offset = x - 12 - tooltipWidth;
+        }
+        offset = Math.max(0, Math.min(offset, plotWidth - tooltipWidth));
+        overlay.tooltip.style.left = `${offset}px`;
+      });
+    };
+
+    overlays.forEach((overlay, panelIndex) => {
+      overlay.plot.addEventListener('pointermove', (event: PointerEvent) => {
+        show(indexAt(overlay.plot, event.clientX), panelIndex);
+      });
+      overlay.plot.addEventListener('pointerdown', (event: PointerEvent) => {
+        show(indexAt(overlay.plot, event.clientX), panelIndex);
+      });
+      overlay.plot.addEventListener('pointerleave', (event: PointerEvent) => {
+        if (event.pointerType === 'mouse' && document.activeElement !== overlay.plot) {
+          hide();
+        }
+      });
+      overlay.plot.addEventListener('focus', () => {
+        show(current >= 0 ? current : 0, panelIndex);
+      });
+      overlay.plot.addEventListener('blur', hide);
+      overlay.plot.addEventListener('keydown', (event: KeyboardEvent) => {
+        const step = event.shiftKey ? 10 : 1;
+        let next = current < 0 ? 0 : current;
+        if (event.key === 'ArrowRight') {
+          next = Math.min(count - 1, next + step);
+        } else if (event.key === 'ArrowLeft') {
+          next = Math.max(0, next - step);
+        } else if (event.key === 'Home') {
+          next = 0;
+        } else if (event.key === 'End') {
+          next = count - 1;
+        } else if (event.key === 'Escape') {
+          overlay.plot.blur();
+          return;
+        } else {
+          return;
+        }
+        event.preventDefault();
+        show(next, panelIndex);
+      });
+    });
+
+    document.addEventListener('pointerdown', (event: PointerEvent) => {
+      if (!figure.contains(event.target as Node)) {
+        hide();
+      }
+    });
+  }
+}
+
 initTheme();
 initMenu();
 initArchiveFilter();
@@ -345,3 +585,4 @@ initToc();
 initCodeCopy();
 initEasterEgg();
 initReadProgress();
+initCharts();

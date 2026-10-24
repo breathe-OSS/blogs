@@ -40,6 +40,7 @@ export interface Post {
   coverCaption?: string;
   draft: boolean;
   html: string;
+  feedHtml: string;
   headings: Heading[];
   words: number;
   minutes: number;

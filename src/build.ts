@@ -19,12 +19,42 @@ import {
   postSidebar,
   type Taxonomy,
 } from './templates.ts';
+import { renderChart, type ChartSpec } from './charts.ts';
 
 const ROOT = join(import.meta.dirname, '..');
 const POSTS_DIR = join(ROOT, 'posts');
 const OUT = join(ROOT, 'dist');
 
 type FrontMatter = Record<string, string | string[]>;
+
+const CHART_PATTERN = /<div class="chart" data-src="([^"]+)"><\/div>/g;
+
+async function embedCharts(
+  html: string,
+  file: string
+): Promise<{ html: string; feedHtml: string }> {
+  const specs = new Map<string, ChartSpec>();
+  for (const match of html.matchAll(CHART_PATTERN)) {
+    const source = match[1];
+    const path = join(ROOT, 'public', source);
+    if (!existsSync(path)) {
+      throw new Error(`${file}: chart data ${source} not found in public/`);
+    }
+    specs.set(source, JSON.parse(await readFile(path, 'utf8')) as ChartSpec);
+  }
+
+  const page = html.replace(CHART_PATTERN, (_, source: string) => {
+    return renderChart(specs.get(source) as ChartSpec, source);
+  });
+  const feed = html.replace(CHART_PATTERN, (_, source: string) => {
+    const spec = specs.get(source) as ChartSpec;
+    if (!spec.fallback) {
+      return '';
+    }
+    return `<p><img src="${spec.fallback}" alt="${esc(spec.title)}" /></p>`;
+  });
+  return { html: page, feedHtml: feed };
+}
 
 function unquote(value: string): string {
   if (/^(['"]).*\1$/.test(value)) {
@@ -141,7 +171,9 @@ async function loadPosts(includeDrafts: boolean): Promise<Post[]> {
       continue;
     }
 
-    const { html, headings } = renderMarkdown(body);
+    const rendered = renderMarkdown(body);
+    const headings = rendered.headings;
+    const { html, feedHtml } = await embedCharts(rendered.html, file);
     const words = body.split(/\s+/).filter((word) => /[a-z0-9]/i.test(word)).length;
     const tags = Array.isArray(data.tags) ? data.tags : [];
 
@@ -164,6 +196,7 @@ async function loadPosts(includeDrafts: boolean): Promise<Post[]> {
         typeof data.coverCaption === 'string' && data.coverCaption ? data.coverCaption : undefined,
       draft,
       html,
+      feedHtml,
       headings,
       words,
       minutes: Math.max(1, Math.round(words / SITE.wordsPerMinute)),
@@ -212,7 +245,7 @@ function rss(posts: Post[]): string {
       <dc:creator>${esc(post.author)}</dc:creator>
       <description>${esc(post.description)}</description>
       ${categories}
-      <content:encoded><![CDATA[${post.html.replace(/]]>/g, ']]]]><![CDATA[>')}]]></content:encoded>
+      <content:encoded><![CDATA[${post.feedHtml.replace(/]]>/g, ']]]]><![CDATA[>')}]]></content:encoded>
     </item>`;
     })
     .join('\n');
