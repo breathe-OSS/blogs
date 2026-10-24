@@ -150,9 +150,8 @@ function navbar(active: NavKey): string {
 
   return `<header class="navbar">
       <nav class="navbar-inner" aria-label="Main">
-        <a class="brand" href="/">
+        <a class="brand" href="/" aria-label="Breathe Blog home" title="Home">
           <img src="/images/logo-mark.png" alt="" width="54" height="40" />
-          <span>Breathe <span class="brand-suffix">Blog</span></span>
         </a>
         <div class="nav-links">${desktop}</div>
         <div class="nav-actions">

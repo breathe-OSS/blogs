@@ -8,6 +8,8 @@
   --primary: #a8c7fa;
   --primary-container: rgba(168, 199, 250, 0.12);
   --on-primary: #0f1216;
+  --logo-glow: drop-shadow(0 0 24px rgba(41, 163, 229, 0.6))
+    drop-shadow(0 0 8px rgba(110, 196, 240, 0.45));
   --page-width: 75rem;
   --sidebar-width: 17.5rem;
   --secondary: #c3c7cf;
@@ -148,6 +150,8 @@
   --primary: #1d4ed8;
   --primary-container: rgba(29, 78, 216, 0.12);
   --on-primary: #ffffff;
+  --logo-glow: drop-shadow(0 0 22px rgba(41, 163, 229, 0.45))
+    drop-shadow(0 0 6px rgba(110, 196, 240, 0.35));
   --secondary: #475569;
   --tertiary: #7c3aed;
   --on-surface: #0f172a;
@@ -323,32 +327,23 @@ img {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
   height: 52px;
-  padding: 0 14px 0 8px;
+  padding: 0 10px;
   border-radius: var(--shape-corner-full);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--primary);
-  white-space: nowrap;
-  transition:
-    background var(--motion-press) var(--motion-easing-standard),
-    transform var(--motion-squish) var(--motion-spring-squish);
-}
-.brand:hover {
-  background: var(--primary-container);
+  transition: transform var(--motion-squish) var(--motion-spring-squish);
 }
 .brand:active {
-  transform: scale(0.95);
+  transform: scale(0.92);
   transition: transform var(--motion-press) var(--motion-easing-standard);
 }
 .brand img {
   width: auto;
-  height: 40px;
+  height: 42px;
+  transition: filter var(--motion-duration-medium2) var(--motion-easing-standard);
 }
-.brand-suffix {
-  color: var(--on-surface-variant);
-  font-weight: 500;
+.brand:hover img,
+.brand:focus-visible img {
+  filter: var(--logo-glow);
 }
 .nav-links {
   display: none;
