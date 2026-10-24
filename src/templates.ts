@@ -379,7 +379,8 @@ export function postPage(post: Post, newer?: Post, older?: Post): string {
   const postNav =
     nav.length > 0 ? `<nav class="post-nav reveal" style="--i: 1">${nav.join('')}</nav>` : '';
 
-  return `<article class="surface article reveal">
+  return `<div class="read-progress" id="read-progress" aria-hidden="true"></div>
+    <article class="surface article reveal">
       ${postMeta(post)}
       <h1 class="article-title">${esc(post.title)}</h1>
       <p class="article-desc">${esc(post.description)}</p>

@@ -1485,3 +1485,15 @@ a.archive-row:hover .archive-title {
     scroll-behavior: smooth;
   }
 }
+.read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  width: 0;
+  height: 4px;
+  border-radius: 0 var(--shape-corner-full) var(--shape-corner-full) 0;
+  background: var(--primary);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--primary) 60%, transparent);
+  pointer-events: none;
+}

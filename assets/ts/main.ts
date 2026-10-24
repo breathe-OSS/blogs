@@ -271,9 +271,34 @@ function initEasterEgg(): void {
   });
 }
 
+function initReadProgress(): void {
+  const bar = document.getElementById('read-progress');
+  const article = document.querySelector<HTMLElement>('.article');
+  if (!bar || !article) {
+    return;
+  }
+
+  const update = (): void => {
+    const start = article.offsetTop;
+    const end = start + article.offsetHeight - window.innerHeight;
+    const progress = end <= start ? 1 : (window.scrollY - start) / (end - start);
+    bar.style.width = `${Math.min(1, Math.max(0, progress)) * 100}%`;
+  };
+
+  let frame = 0;
+  const schedule = (): void => {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(update);
+  };
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  update();
+}
+
 initTheme();
 initMenu();
 initArchiveFilter();
 initToc();
 initCodeCopy();
 initEasterEgg();
+initReadProgress();
