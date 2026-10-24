@@ -309,12 +309,12 @@ function stats(post: Post): string {
 
 export function postCard(post: Post, index: number): string {
   const side = post.cover
-    ? `<div class="post-card-cover"><img src="${post.cover}" alt="" loading="lazy" /></div>`
-    : `<div class="post-card-enter" aria-hidden="true">${icon('chevronRight')}</div>`;
+    ? `<a class="post-card-cover" href="${postPath(post)}" tabindex="-1" aria-hidden="true"><img src="${post.cover}" alt="" loading="lazy" /></a>`
+    : `<a class="post-card-enter" href="${postPath(post)}" tabindex="-1" aria-hidden="true">${icon('chevronRight')}</a>`;
 
   return `<article class="surface post-card reveal" style="--i: ${index}">
       <div class="post-card-body">
-        <h2 class="post-card-title"><a href="${postPath(post)}">${esc(post.title)}</a>${icon('chevronRight')}</h2>
+        <h2 class="post-card-title"><a href="${postPath(post)}">${esc(post.title)}${icon('chevronRight')}</a></h2>
         ${postMeta(post)}
         <p class="post-card-desc">${esc(post.description)}</p>
         ${stats(post)}
