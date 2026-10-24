@@ -10,7 +10,8 @@
   "scripts": {
     "build": "node --disable-warning=ExperimentalWarning src/build.ts",
     "dev": "node --disable-warning=ExperimentalWarning --watch-path=src --watch-path=posts --watch-path=assets --watch-path=public src/dev.ts",
-    "fmt": "npx prettier --write ."
+    "fmt": "npx prettier --write .",
+    "typecheck": "tsc -p ."
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,9 @@
     "singleQuote": true,
     "bracketSameLine": true,
     "trailingComma": "es5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "typescript": "^5.9.3"
   }
 }
