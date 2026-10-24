@@ -292,10 +292,18 @@ function postMeta(post: Post): string {
 }
 
 function stats(post: Post): string {
+  const updated = post.updated
+    ? `<span class="meta-sep">|</span>
+      <span>Updated ${formatDate(post.updated)}</span>`
+    : '';
+
   return `<div class="stats">
       <span>${post.words.toLocaleString('en-US')} words</span>
       <span class="meta-sep">|</span>
       <span>${post.minutes} min read</span>
+      <span class="meta-sep">|</span>
+      <span class="stats-author">${esc(post.author)}</span>
+      ${updated}
     </div>`;
 }
 
@@ -349,13 +357,6 @@ export function postPage(post: Post, newer?: Post, older?: Post): string {
   const cover = post.cover
     ? `<div class="article-cover"><img src="${post.cover}" alt="" /></div>`
     : '';
-  const updated = post.updated
-    ? `<div>
-          <div class="article-info-label">Updated</div>
-          <div class="article-info-value">${formatDate(post.updated)}</div>
-        </div>`
-    : '';
-
   const nav: string[] = [];
   if (newer) {
     nav.push(`<a class="surface post-nav-link prev" href="${postPath(newer)}">
@@ -386,25 +387,6 @@ export function postPage(post: Post, newer?: Post, older?: Post): string {
       <hr class="divider" />
       ${cover}
       <div class="prose">${post.html}</div>
-      <div class="article-info">
-        <div class="article-info-head">
-          <div class="article-info-title">${esc(post.title)}</div>
-          <div class="article-info-url">${absolute(postPath(post))}</div>
-        </div>
-        <div>
-          <div class="article-info-label">Author</div>
-          <div class="article-info-value">${esc(post.author)}</div>
-        </div>
-        <div>
-          <div class="article-info-label">Published</div>
-          <div class="article-info-value">${formatDate(post.published)}</div>
-        </div>
-        ${updated}
-        <div>
-          <div class="article-info-label">Source</div>
-          <div class="article-info-value"><a href="${SITE.repo}/blob/main/posts/${post.file}" target="_blank" rel="noopener">Edit on GitHub</a></div>
-        </div>
-      </div>
     </article>
     ${postNav}`;
 }

@@ -913,42 +913,6 @@ img {
   border: none;
   border-top: 1px dashed var(--outline);
 }
-.article-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 16px;
-  margin-top: 40px;
-  padding: 20px 24px;
-  border-radius: var(--shape-corner-large);
-  background: var(--surface-container-high);
-}
-.article-info-head {
-  grid-column: 1 / -1;
-}
-.article-info-title {
-  font-weight: 700;
-}
-.article-info-url {
-  font-size: 14px;
-  color: var(--on-surface-variant);
-  word-break: break-all;
-}
-.article-info-label {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--on-surface-variant);
-}
-.article-info-value {
-  font-weight: 500;
-}
-.article-info a {
-  color: var(--primary);
-}
-.article-info a:hover {
-  text-decoration: underline;
-}
 @media (max-width: 767px) {
   .article {
     padding: 24px 20px 28px;
@@ -1511,4 +1475,8 @@ a.archive-row:hover .archive-title {
 .toast img {
   width: auto;
   height: 20px;
+}
+.stats-author {
+  font-weight: 500;
+  color: var(--on-surface);
 }
