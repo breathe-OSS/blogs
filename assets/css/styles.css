@@ -1480,3 +1480,8 @@ a.archive-row:hover .archive-title {
   font-weight: 500;
   color: var(--on-surface);
 }
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
