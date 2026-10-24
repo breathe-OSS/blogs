@@ -1,0 +1,30 @@
+{
+  "name": "blogs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Breathe: the breatheOSS blog at blogs.breatheoss.app",
+  "type": "module",
+  "engines": {
+    "node": ">=24.2"
+  },
+  "scripts": {
+    "build": "node --disable-warning=ExperimentalWarning src/build.ts",
+    "dev": "node --disable-warning=ExperimentalWarning --watch-path=src --watch-path=posts --watch-path=assets --watch-path=public src/dev.ts",
+    "fmt": "npx prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/breathe-OSS/blogs.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "marked": "^18.1.1"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "bracketSameLine": true,
+    "trailingComma": "es5"
+  }
+}
