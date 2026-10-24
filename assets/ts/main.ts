@@ -104,6 +104,9 @@ function initArchiveFilter(): void {
   }
 }
 
+const TOC_ACTIVE_ZONE = 0.3;
+const TOC_LOCK_FALLBACK_MS = 1200;
+
 function initToc(): void {
   const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.toc a'));
   if (links.length === 0) {
@@ -120,29 +123,69 @@ function initToc(): void {
       headings.push(heading);
     }
   }
+  if (headings.length === 0) {
+    return;
+  }
 
-  const setActive = (): void => {
-    let current = headings[0];
-    for (const heading of headings) {
-      if (heading.getBoundingClientRect().top <= 120) {
-        current = heading;
-      }
-    }
+  let lockedId = '';
+  let unlockTimer = 0;
+
+  const highlight = (id: string): void => {
+    const active = byId.get(id);
     for (const link of links) {
-      link.classList.toggle('active', link === byId.get(current.id));
+      link.classList.toggle('active', link === active);
     }
   };
+
+  const update = (): void => {
+    if (lockedId) {
+      return;
+    }
+    const root = document.documentElement;
+    const atBottom = window.scrollY + window.innerHeight >= root.scrollHeight - 4;
+    let current = headings[0];
+    if (atBottom) {
+      current = headings[headings.length - 1];
+    } else {
+      for (const heading of headings) {
+        if (heading.getBoundingClientRect().top <= window.innerHeight * TOC_ACTIVE_ZONE) {
+          current = heading;
+        }
+      }
+    }
+    highlight(current.id);
+  };
+
+  const unlock = (): void => {
+    window.clearTimeout(unlockTimer);
+    lockedId = '';
+  };
+
+  for (const link of links) {
+    link.addEventListener('click', () => {
+      lockedId = decodeURIComponent(link.hash.slice(1));
+      highlight(lockedId);
+      window.clearTimeout(unlockTimer);
+      unlockTimer = window.setTimeout(unlock, TOC_LOCK_FALLBACK_MS);
+    });
+  }
 
   let frame = 0;
   window.addEventListener(
     'scroll',
     () => {
       cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(setActive);
+      frame = requestAnimationFrame(update);
     },
     { passive: true }
   );
-  setActive();
+  window.addEventListener('scrollend', () => {
+    if (lockedId) {
+      unlock();
+    }
+  });
+  window.addEventListener('resize', update);
+  update();
 }
 
 function initCodeCopy(): void {
