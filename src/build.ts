@@ -207,6 +207,7 @@ function rss(posts: Post[]): string {
       <link>${url}</link>
       <guid isPermaLink="true">${url}</guid>
       <pubDate>${post.published.toUTCString()}</pubDate>
+      <dc:creator>${esc(post.author)}</dc:creator>
       <description>${esc(post.description)}</description>
       ${categories}
       <content:encoded><![CDATA[${post.html.replace(/]]>/g, ']]]]><![CDATA[>')}]]></content:encoded>
@@ -215,7 +216,7 @@ function rss(posts: Post[]): string {
     .join('\n');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${SITE.title}</title>
     <link>${SITE.url}/</link>
