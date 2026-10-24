@@ -1185,6 +1185,19 @@ img {
   margin: 1.4em auto;
   border-radius: var(--shape-corner-large);
 }
+.prose figure {
+  margin: 1.4em 0;
+}
+.prose figure img {
+  margin: 0 auto;
+}
+.prose figcaption {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--on-surface-variant);
+}
 .prose img.only-light {
   display: none;
 }
