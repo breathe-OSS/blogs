@@ -1179,6 +1179,15 @@ img {
   margin: 1.4em auto;
   border-radius: var(--shape-corner-large);
 }
+.prose img.only-light {
+  display: none;
+}
+[data-theme='light'] .prose img.only-light {
+  display: block;
+}
+[data-theme='light'] .prose img.only-dark {
+  display: none;
+}
 .prose hr {
   margin: 2em 0;
   border: none;

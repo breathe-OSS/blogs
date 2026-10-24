@@ -30,7 +30,14 @@ draft: false
 Write the post here.
 ```
 
-Only `title`, `description` and `published` are required. Put images in `public/images/`. Posts with `draft: true` show up in `npm run dev` but are left out of `npm run build`.
+Only `title`, `description` and `published` are required. Put images in `public/images/`. For an image that should change with the theme, add both versions and tag them:
+
+```html
+<img class="only-dark" src="/images/posts/my-post/chart-dark.png" alt="What the chart shows" />
+<img class="only-light" src="/images/posts/my-post/chart-light.png" alt="What the chart shows" />
+```
+
+Posts with `draft: true` show up in `npm run dev` but are left out of `npm run build`.
 
 ## Commands
 
