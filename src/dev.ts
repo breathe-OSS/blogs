@@ -39,7 +39,7 @@ async function resolve(pathname: string): Promise<string | null> {
 
 await build({ drafts: true });
 
-createServer(async (request, response) => {
+const server = createServer(async (request, response) => {
   const url = new URL(request.url ?? '/', 'http://localhost');
   const file = await resolve(url.pathname);
   if (!file) {
@@ -52,6 +52,23 @@ createServer(async (request, response) => {
     'cache-control': 'no-store',
   });
   response.end(await readFile(file));
-}).listen(PORT, () => {
-  console.log(`Serving dist/ (drafts included) at http://localhost:${PORT}`);
 });
+
+const MAX_PORT_TRIES = 10;
+let port = PORT;
+
+server.on('error', (error: NodeJS.ErrnoException) => {
+  if (error.code === 'EADDRINUSE' && port < PORT + MAX_PORT_TRIES) {
+    console.log(`Port ${port} is busy, trying ${port + 1}`);
+    port++;
+    server.listen(port);
+    return;
+  }
+  throw error;
+});
+
+server.on('listening', () => {
+  console.log(`Serving dist/ (drafts included) at http://localhost:${port}`);
+});
+
+server.listen(port);
