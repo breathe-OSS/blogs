@@ -1481,3 +1481,34 @@ a.archive-row:hover .archive-title {
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: max(96px, 12vh);
+  z-index: 300;
+  max-width: calc(100% - 32px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px 10px 12px;
+  border-radius: var(--shape-corner-full);
+  background: var(--surface-container-highest);
+  color: var(--on-surface);
+  font-size: 14px;
+  line-height: 1.4;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translate(-50%, 16px);
+  pointer-events: none;
+  transition:
+    opacity var(--motion-duration-medium1) var(--motion-easing-standard),
+    transform var(--motion-duration-medium4) var(--motion-easing-emphasized-decelerate);
+}
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.toast img {
+  width: auto;
+  height: 20px;
+}

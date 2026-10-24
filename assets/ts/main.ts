@@ -176,8 +176,104 @@ function initCodeCopy(): void {
   }
 }
 
+const TOAST_SHORT_MS = 2000;
+const TOAST_LONG_MS = 3500;
+const TOAST_SWAP_MS = 250;
+
+let toastVisible = false;
+let toastHideTimer = 0;
+let toastSwapTimer = 0;
+
+function createToast(): HTMLElement {
+  const toast = document.createElement('div');
+  toast.id = 'toast';
+  toast.className = 'toast';
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+  toast.innerHTML = '<img src="/images/logo-mark.png" alt="" /><span></span>';
+  document.body.appendChild(toast);
+  return toast;
+}
+
+function showToast(message: string, duration: number): void {
+  const toast = document.getElementById('toast') ?? createToast();
+  const text = toast.querySelector('span');
+
+  const reveal = (): void => {
+    if (text) {
+      text.textContent = message;
+    }
+    void toast.offsetWidth;
+    toast.classList.add('show');
+    toastVisible = true;
+    toastHideTimer = window.setTimeout(() => {
+      toast.classList.remove('show');
+      toastVisible = false;
+    }, duration);
+  };
+
+  window.clearTimeout(toastHideTimer);
+  window.clearTimeout(toastSwapTimer);
+
+  if (toastVisible) {
+    toast.classList.remove('show');
+    toastSwapTimer = window.setTimeout(reveal, TOAST_SWAP_MS);
+    return;
+  }
+  reveal();
+}
+
+// Breathe, breathe in the air. Don't be afraid to care.
+const EASTER_EGG_LINE = "Breathe, breathe in the air. Don't be afraid to care.";
+const EASTER_EGG_TRIBUTE = 'Shine on, you crazy diamond!';
+const EASTER_EGG_TAPS = 5;
+const EASTER_EGG_RESET_MS = 1500;
+
+let easterEggCounter = 0;
+let easterEggResetTimer = 0;
+let easterEggDone = false;
+
+function initEasterEgg(): void {
+  const logo = document.getElementById('logo-egg');
+  if (!logo) {
+    return;
+  }
+
+  logo.addEventListener('click', () => {
+    // Once is enough until the next refresh
+    if (easterEggDone) {
+      return;
+    }
+
+    easterEggCounter++;
+
+    // Taps only count when they come in a row
+    window.clearTimeout(easterEggResetTimer);
+    easterEggResetTimer = window.setTimeout(() => {
+      easterEggCounter = 0;
+    }, EASTER_EGG_RESET_MS);
+
+    if (easterEggCounter >= EASTER_EGG_TAPS) {
+      easterEggCounter = 0;
+      easterEggDone = true;
+
+      // Shine on, you crazy diamond!
+      // Tribute
+      showToast(EASTER_EGG_TRIBUTE, TOAST_LONG_MS);
+      return;
+    }
+
+    // Let the lyric finish before it can show again
+    if (toastVisible) {
+      return;
+    }
+    showToast(EASTER_EGG_LINE, TOAST_SHORT_MS);
+  });
+}
+
 initTheme();
 initMenu();
 initArchiveFilter();
 initToc();
 initCodeCopy();
+initEasterEgg();

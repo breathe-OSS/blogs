@@ -194,9 +194,9 @@ function profileCard(): string {
     .join('');
 
   return `<section class="surface profile reveal">
-      <a class="profile-banner" href="${LINKS.about}" aria-label="About BreatheOSS">
+      <button class="profile-banner" id="logo-egg" type="button" aria-label="Breathe">
         <img src="/images/logo-mark.png" alt="" width="194" height="144" />
-      </a>
+      </button>
       <h2 class="profile-name">${SITE.name}</h2>
       <div class="accent-bar"></div>
       <p class="profile-tagline">${esc(SITE.tagline)}</p>
