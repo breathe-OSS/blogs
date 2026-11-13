@@ -1551,7 +1551,8 @@ a.archive-row:hover .archive-title {
   pointer-events: none;
 }
 .chart,
-.widget {
+.widget,
+.worked {
   margin: 1.6em 0;
   padding: 20px 20px 16px;
   border: 1px solid var(--outline-variant);
@@ -2116,5 +2117,140 @@ a.archive-row:hover .archive-title {
   }
   .widget-stat-value {
     font-size: 18px;
+  }
+}
+
+.worked {
+  padding: 20px 20px 16px;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--shape-corner-large);
+  background: var(--background);
+}
+.prose .worked-title {
+  margin: 0 0 4px;
+  text-align: left;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--on-surface);
+}
+.rulers {
+  display: grid;
+  gap: 18px;
+  margin: 20px 0 8px;
+}
+.ruler {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 16px;
+  align-items: center;
+}
+.ruler-name {
+  grid-row: 1 / span 2;
+  font-size: 13px;
+  color: var(--on-surface-variant);
+}
+.ruler-track {
+  position: relative;
+  height: 8px;
+  margin-top: 26px;
+  border-radius: 4px;
+  background: var(--surface-container-highest);
+}
+.ruler-mark {
+  position: absolute;
+  bottom: -6px;
+  transform: translateX(-50%);
+  padding-bottom: 22px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+.ruler-mark::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 4px;
+  height: 20px;
+  border-radius: 2px;
+  background: var(--primary);
+  transform: translateX(-50%);
+}
+.ruler-ends {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+.prose .worked-steps {
+  list-style: none;
+  counter-reset: worked;
+  margin: 16px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--outline-variant);
+}
+.prose .worked-steps li {
+  counter-increment: worked;
+  position: relative;
+  margin: 0;
+  padding: 16px 0 16px 48px;
+}
+.prose .worked-steps li + li {
+  border-top: 1px solid var(--outline-variant);
+}
+.prose .worked-steps li::before {
+  content: counter(worked);
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background: var(--primary-container);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+.prose .worked-steps p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--on-surface-variant);
+}
+.formula {
+  margin: 12px 0;
+  overflow-x: auto;
+  color: var(--on-surface);
+}
+.formula math {
+  font-family: 'STIX Two Math', 'Cambria Math', 'Latin Modern Math', math;
+  font-size: 1.3em;
+}
+.prose .worked-result {
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px dashed var(--outline-variant);
+  font-weight: 700;
+  color: var(--on-surface);
+}
+@media (max-width: 600px) {
+  .worked {
+    padding: 16px 12px 12px;
+  }
+  .ruler {
+    grid-template-columns: 1fr;
+  }
+  .ruler-name {
+    grid-row: auto;
+  }
+  .formula math {
+    font-size: 1.1em;
   }
 }
