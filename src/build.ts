@@ -28,6 +28,7 @@ const OUT = join(ROOT, 'dist');
 type FrontMatter = Record<string, string | string[]>;
 
 const CHART_PATTERN = /<div class="chart" data-src="([^"]+)"><\/div>/g;
+const WIDGET_PATTERN = /<div class="widget" data-widget="([a-z-]+)"(?: data-src="([^"]+)")?><\/div>/g;
 
 async function embedCharts(
   html: string,
@@ -43,16 +44,32 @@ async function embedCharts(
     specs.set(source, JSON.parse(await readFile(path, 'utf8')) as ChartSpec);
   }
 
-  const page = html.replace(CHART_PATTERN, (_, source: string) => {
-    return renderChart(specs.get(source) as ChartSpec, source);
-  });
-  const feed = html.replace(CHART_PATTERN, (_, source: string) => {
-    const spec = specs.get(source) as ChartSpec;
-    if (!spec.fallback) {
-      return '';
+  for (const match of html.matchAll(WIDGET_PATTERN)) {
+    const source = match[2];
+    if (source && !existsSync(join(ROOT, 'public', source))) {
+      throw new Error(`${file}: widget data ${source} not found in public/`);
     }
-    return `<p><img src="${spec.fallback}" alt="${esc(spec.title)}" /></p>`;
-  });
+  }
+
+  const page = html
+    .replace(CHART_PATTERN, (_, source: string) => {
+      return renderChart(specs.get(source) as ChartSpec, source);
+    })
+    .replace(WIDGET_PATTERN, (_, name: string, source: string | undefined) => {
+      const data = source ? ` data-src="${esc(source)}"` : '';
+      return `<figure class="widget" data-widget="${esc(name)}"${data}><p class="widget-fallback">This is an interactive example and needs JavaScript to run.</p></figure>`;
+    });
+  const feed = html
+    .replace(CHART_PATTERN, (_, source: string) => {
+      const spec = specs.get(source) as ChartSpec;
+      if (!spec.fallback) {
+        return '';
+      }
+      return `<p><img src="${spec.fallback}" alt="${esc(spec.title)}" /></p>`;
+    })
+    .replace(WIDGET_PATTERN, () => {
+      return '<p><em>There is an interactive example here. Open the post on the site to try it.</em></p>';
+    });
   return { html: page, feedHtml: feed };
 }
 

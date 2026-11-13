@@ -422,6 +422,21 @@ function tooltipContent(data: ChartData, panelIndex: number, index: number): HTM
   return nodes;
 }
 
+function initWidgets(): void {
+  if (!document.querySelector('figure.widget')) {
+    return;
+  }
+  const url = new URL('./widgets.js', import.meta.url);
+  url.search = new URL(import.meta.url).search;
+  import(url.href)
+    .then((module: { initWidgets: () => void }) => {
+      module.initWidgets();
+    })
+    .catch((error: unknown) => {
+      console.warn('Could not load widgets', error);
+    });
+}
+
 function initCharts(): void {
   for (const figure of document.querySelectorAll<HTMLElement>('figure.chart')) {
     const script = figure.querySelector('script.chart-data');
@@ -587,3 +602,4 @@ initCodeCopy();
 initEasterEgg();
 initReadProgress();
 initCharts();
+initWidgets();
