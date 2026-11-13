@@ -1,5 +1,5 @@
 ---
-title: Everyone had an AQI and nobody had the same one
+title: Everyone had an AQI number to say but no two voices were the same.
 description: Why every app, pollution board and Instagram page gave a different answer for the same air this Diwali, how the number is actually made, and what our sensors in Jammu, Kashmir and Ladakh recorded.
 published: 2026-11-13
 category: Air quality
