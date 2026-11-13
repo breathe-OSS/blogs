@@ -1218,6 +1218,17 @@ img {
 .prose figure img {
   margin: 0 auto;
 }
+.prose .figure-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.prose .figure-pair img {
+  width: 100%;
+  margin: 0;
+}
 .prose figcaption {
   margin-top: 10px;
   font-size: 14px;
