@@ -341,6 +341,7 @@ function initReadProgress(): void {
 interface ChartSeriesData {
   name: string;
   color: string;
+  colors: string[] | null;
   values: (number | null)[];
 }
 
@@ -402,7 +403,7 @@ function tooltipContent(data: ChartData, panelIndex: number, index: number): HTM
     const value = series.values[index];
     const row = element('div', 'chart-tooltip-row');
     const swatch = element('span', 'chart-swatch');
-    swatch.style.setProperty('--c', chartColor(series.color));
+    swatch.style.setProperty('--c', chartColor(series.colors?.[index] ?? series.color));
     row.append(swatch, element('span', '', series.name));
     const text =
       value === null || value === undefined ? 'no data' : `${value.toFixed(1)} ${data.unit}`;

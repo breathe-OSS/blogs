@@ -79,7 +79,7 @@ The build turns it into an SVG chart that follows the site theme, with a hover t
 }
 ```
 
-`kind` is `line` or `bar`. `layout` is `single`, `rows` or `columns` when there is more than one panel. `color` is `jammu`, `srinagar` or `muted`, and `style` is `solid`, `dashed` or `faint`. Bar panels can add `valueLabels` as `[series, index]` pairs. The `fallback` image is used in the RSS feed, where charts can't run.
+`kind` is `line` or `bar`. `layout` is `single`, `rows` or `columns` when there is more than one panel. `color` is `jammu`, `srinagar`, `c1` to `c4`, `official` or `muted`, and `style` is `solid`, `dashed` or `faint`. A bar series can set `colors`, one per bar, to colour bars on their own. Bar panels can add `valueLabels` as `[series, index]` pairs. Set `bands` to `false` when the y axis isn't PM2.5 in µg/m³, so the US EPA category bands are left out, and set `source` to replace the default source line. The `fallback` image is used in the RSS feed, where charts can't run.
 
 Posts with `draft: true` show up in `npm run dev` but are left out of `npm run build`.
 

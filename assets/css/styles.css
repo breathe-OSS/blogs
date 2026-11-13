@@ -10,6 +10,11 @@
   --on-primary: #0f1216;
   --chart-jammu: #2e9bdc;
   --chart-srinagar: #d85d92;
+  --chart-c1: #2e9bdc;
+  --chart-c2: #f59e0b;
+  --chart-c3: #34d399;
+  --chart-c4: #a78bfa;
+  --chart-official: #2dd4bf;
   --band-alpha: 0.08;
   --logo-glow: drop-shadow(0 0 24px rgba(41, 163, 229, 0.6))
     drop-shadow(0 0 8px rgba(110, 196, 240, 0.45));
@@ -153,6 +158,11 @@
   --primary: #1d4ed8;
   --primary-container: rgba(29, 78, 216, 0.12);
   --on-primary: #ffffff;
+  --chart-c1: #1d7fbf;
+  --chart-c2: #d97706;
+  --chart-c3: #059669;
+  --chart-c4: #7c3aed;
+  --chart-official: #0d9488;
   --band-alpha: 0.13;
   --logo-glow: drop-shadow(0 0 22px rgba(41, 163, 229, 0.45))
     drop-shadow(0 0 6px rgba(110, 196, 240, 0.35));

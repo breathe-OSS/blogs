@@ -7,6 +7,7 @@ interface Series {
   color: string;
   style: Style;
   values: (number | null)[];
+  colors?: string[];
 }
 
 interface Panel {
@@ -28,6 +29,8 @@ export interface ChartSpec {
   legend?: { name: string; color: string; style: Style }[];
   x: { labels: string[]; ticks: [number, string][] };
   panels: Panel[];
+  bands?: boolean;
+  source?: string;
   fallback?: string;
 }
 
@@ -107,7 +110,7 @@ function bars(spec: ChartSpec, panel: Panel): string {
       const x = index * groupWidth + (groupWidth - inner) / 2 + seriesIndex * barWidth + gap / 2;
       const height = (Math.min(value, panel.yMax) / panel.yMax) * 1000;
       rects.push(
-        `<rect class="chart-bar" data-i="${index}" x="${round(x)}" y="${round(1000 - height)}" width="${round(barWidth - gap)}" height="${round(height)}" style="fill: ${colorVar(series.color)}" />`
+        `<rect class="chart-bar" data-i="${index}" x="${round(x)}" y="${round(1000 - height)}" width="${round(barWidth - gap)}" height="${round(height)}" style="fill: ${colorVar(series.colors?.[index] ?? series.color)}" />`
       );
     });
   });
@@ -246,7 +249,7 @@ function panelHtml(spec: ChartSpec, panel: Panel, index: number): string {
       <div class="chart-body">
         <div class="chart-y" aria-hidden="true">${grid.labels}</div>
         <div class="chart-plot" tabindex="0" role="group" aria-label="${esc(aria)}">
-          <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">${bandRects(panel.yMax)}${grid.lines}${body}</svg>
+          <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">${spec.bands === false ? '' : bandRects(panel.yMax)}${grid.lines}${body}</svg>
           ${marks(spec, panel)}
         </div>
         <div class="chart-x" aria-hidden="true">${ticks}</div>
@@ -267,6 +270,7 @@ export function renderChart(spec: ChartSpec, dataUrl: string): string {
       series: panel.series.map((series) => ({
         name: series.name,
         color: series.color,
+        colors: series.colors ?? null,
         values: series.values,
       })),
     })),
@@ -283,9 +287,9 @@ export function renderChart(spec: ChartSpec, dataUrl: string): string {
     </figcaption>
     ${yLabel}
     <div class="chart-panels">${panels}</div>
-    ${bandLegend(spec)}
+    ${spec.bands === false ? '' : bandLegend(spec)}
     <div class="chart-foot">
-      <span>${SOURCE}</span>
+      <span>${esc(spec.source ?? SOURCE)}</span>
       <a href="${esc(dataUrl)}" download>Download the data</a>
     </div>
     ${table(spec)}
