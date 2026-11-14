@@ -16,7 +16,7 @@ interface PlotOptions {
 }
 
 interface Plot {
-  draw: (series: PlotSeries[], yMax: number) => void;
+  draw: (series: PlotSeries[], yMax: number, bands?: Band[]) => void;
 }
 
 interface Band {
@@ -31,6 +31,15 @@ const EPA_BANDS: Band[] = [
   { limit: 55.4, label: 'Unhealthy for sensitive groups', key: 'usg' },
   { limit: 125.4, label: 'Unhealthy', key: 'unhealthy' },
   { limit: 225.4, label: 'Very unhealthy', key: 'very-unhealthy' },
+  { limit: Infinity, label: 'Hazardous', key: 'hazardous' },
+];
+
+const EPA_PM10_BANDS: Band[] = [
+  { limit: 54, label: 'Good', key: 'good' },
+  { limit: 154, label: 'Moderate', key: 'moderate' },
+  { limit: 254, label: 'Unhealthy for sensitive groups', key: 'usg' },
+  { limit: 354, label: 'Unhealthy', key: 'unhealthy' },
+  { limit: 424, label: 'Very unhealthy', key: 'very-unhealthy' },
   { limit: Infinity, label: 'Hazardous', key: 'hazardous' },
 ];
 
@@ -88,13 +97,13 @@ function fmt(value: number): string {
   return value.toFixed(1);
 }
 
-function epaBand(value: number): Band {
-  for (const band of EPA_BANDS) {
+function epaBand(value: number, bands: Band[] = EPA_BANDS): Band {
+  for (const band of bands) {
     if (value <= band.limit) {
       return band;
     }
   }
-  return EPA_BANDS[EPA_BANDS.length - 1];
+  return bands[bands.length - 1];
 }
 
 function interpolate(
@@ -321,6 +330,8 @@ function createPlot(parent: HTMLElement, options: PlotOptions): Plot {
   let count = 1;
   let top = 1;
   let drawnTop = -1;
+  let bands = EPA_BANDS;
+  let drawnBands: Band[] | null = null;
   const backdrop = svg('g', {});
   const data = svg('g', {});
   const lines: SVGElement[] = [];
@@ -373,7 +384,7 @@ function createPlot(parent: HTMLElement, options: PlotOptions): Plot {
     const first = current.find((series) => series.style !== 'faint') ?? current[0];
     const value = first.values[index];
     if (value !== null && value !== undefined) {
-      rows.push(el('div', 'chart-tooltip-category', `US EPA: ${epaBand(value).label}`));
+      rows.push(el('div', 'chart-tooltip-category', `US EPA: ${epaBand(value, bands).label}`));
     }
     tooltip.replaceChildren(...rows);
     tooltip.hidden = false;
@@ -409,13 +420,15 @@ function createPlot(parent: HTMLElement, options: PlotOptions): Plot {
   });
 
   return {
-    draw: (series, yMax) => {
+    draw: (series, yMax, bandSet) => {
       current = series;
       count = Math.max(1, ...series.map((item) => item.values.length));
       top = yMax;
       placeTicks();
-      if (top !== drawnTop) {
+      bands = bandSet ?? EPA_BANDS;
+      if (top !== drawnTop || bands !== drawnBands) {
         drawnTop = top;
+        drawnBands = bands;
         drawBackdrop();
       }
       if (options.bars) {
@@ -481,7 +494,7 @@ function createPlot(parent: HTMLElement, options: PlotOptions): Plot {
   function drawBackdrop(): void {
     const nodes: SVGElement[] = [];
     let low = 0;
-    for (const band of EPA_BANDS) {
+    for (const band of bands) {
       if (low >= top) {
         break;
       }
@@ -970,7 +983,20 @@ interface YearData {
   step: number;
   diwali: [number, number];
   baseline: number;
+  baseline10: number;
   values: (number | null)[];
+  values10: (number | null)[];
+}
+
+interface YearMetric {
+  name: string;
+  values: (number | null)[];
+  baseline: number;
+  india: number;
+  who: number;
+  hazardous: number;
+  yMax: number;
+  bands: Band[];
 }
 
 async function yearWidget(figure: HTMLElement, source: string): Promise<void> {
@@ -978,8 +1004,31 @@ async function yearWidget(figure: HTMLElement, source: string): Promise<void> {
   head(
     figure,
     'What if Diwali never happened?',
-    `Every hour we have recorded in ${data.name} this year. Take Diwali night out, or cut everyday pollution instead, and compare.`
+    `Every hour we have recorded in ${data.name} this year, as daily averages. Take Diwali night out, or cut everyday pollution instead, and compare. Switch between PM2.5 and PM10.`
   );
+  const metrics: Record<string, YearMetric> = {
+    pm25: {
+      name: 'PM2.5',
+      values: data.values,
+      baseline: data.baseline,
+      india: 60,
+      who: 15,
+      hazardous: 225.4,
+      yMax: 200,
+      bands: EPA_BANDS,
+    },
+    pm10: {
+      name: 'PM10',
+      values: data.values10,
+      baseline: data.baseline10,
+      india: 100,
+      who: 45,
+      hazardous: 424,
+      yMax: 250,
+      bands: EPA_PM10_BANDS,
+    },
+  };
+  let metric = metrics.pm25;
   const dayKey = (index: number): number => Math.floor((data.start + index * data.step) / 86400);
   const keys: number[] = [];
   const indexOfDay = new Map<number, number>();
@@ -1011,7 +1060,8 @@ async function yearWidget(figure: HTMLElement, source: string): Promise<void> {
   });
 
   const summarise = (
-    values: (number | null)[]
+    values: (number | null)[],
+    limits: YearMetric
   ): { mean: number; daily: (number | null)[]; india: number; who: number; hazardous: number } => {
     const sums = keys.map(() => 0);
     const counts = keys.map(() => 0);
@@ -1027,7 +1077,7 @@ async function yearWidget(figure: HTMLElement, source: string): Promise<void> {
       counts[slot] += 1;
       total += value;
       n += 1;
-      if (value > 225.4) {
+      if (value > limits.hazardous) {
         hazardous += 1;
       }
     });
@@ -1036,47 +1086,51 @@ async function yearWidget(figure: HTMLElement, source: string): Promise<void> {
     return {
       mean: total / n,
       daily,
-      india: full.filter((value) => value > 60).length,
-      who: full.filter((value) => value <= 15).length,
+      india: full.filter((value) => value > limits.india).length,
+      who: full.filter((value) => value <= limits.who).length,
       hazardous,
     };
   };
 
-  const actual = summarise(data.values);
-
   const update = (): void => {
-    const changed = data.values.map((value, index) => {
+    const actual = summarise(metric.values, metric);
+    const changed = metric.values.map((value, index) => {
       if (value === null) {
         return null;
       }
       let next = value;
       if (removeDiwali && index >= data.diwali[0] && index < data.diwali[1]) {
-        next = Math.min(next, data.baseline);
+        next = Math.min(next, metric.baseline);
       }
       return next * (1 - cut / 100);
     });
-    const result = summarise(changed);
+    const result = summarise(changed, metric);
     plot.draw(
       [
         { name: 'As recorded', color: 'muted', style: 'faint', values: actual.daily },
         { name: 'Your version', color: 'jammu', style: 'solid', values: result.daily },
       ],
-      200
+      metric.yMax,
+      metric.bands
     );
     const delta = result.mean - actual.mean;
     readout.set([
       [
-        'Average for the year',
+        `Average ${metric.name} for the year`,
         `${result.mean.toFixed(1)} µg/m³`,
         delta === 0 ? 'as recorded' : `${delta.toFixed(1)} from what we recorded`,
       ],
       [
-        "Days over India's limit (60)",
+        `Days over India's limit (${metric.india})`,
         String(result.india),
         `of ${actual.daily.filter((value) => value !== null).length}, recorded ${actual.india}`,
       ],
-      ["Days within WHO's guideline (15)", String(result.who), `recorded ${actual.who}`],
-      ['Hours above 225 µg/m³', String(result.hazardous), `recorded ${actual.hazardous}`],
+      [`Days within WHO's guideline (${metric.who})`, String(result.who), `recorded ${actual.who}`],
+      [
+        `Hours above ${Math.round(metric.hazardous)} µg/m³`,
+        String(result.hazardous),
+        `recorded ${actual.hazardous}, the EPA's "Hazardous"`,
+      ],
     ]);
   };
 
@@ -1095,11 +1149,23 @@ async function yearWidget(figure: HTMLElement, source: string): Promise<void> {
     cut = value;
     update();
   });
-  controls.append(toggleRow, cutControl.root);
+  const metricChips = chips(
+    [
+      ['pm25', 'PM2.5'],
+      ['pm10', 'PM10'],
+    ],
+    'pm25',
+    'Pollutant',
+    (value) => {
+      metric = metrics[value];
+      update();
+    }
+  );
+  controls.append(metricChips, toggleRow, cutControl.root);
   figure.append(controls, plotHost, readout.root);
   foot(
     figure,
-    'Source: Breathe ground sensors in Jammu (AirGradient), 18 January to 13 November 2026. "Taking out Diwali" caps 5 pm on 8 November to 9 am on 9 November at the week\'s average of 131 µg/m³.'
+    `Source: Breathe ground sensors in Jammu (AirGradient), 18 January to 13 November 2026. "Taking out Diwali" caps 5 pm on 8 November to 9 am on 9 November at the week's average, ${data.baseline} µg/m³ of PM2.5 and ${data.baseline10} of PM10. Limits are 24-hour ones. Our laser sensors undercount coarse dust, so the PM10 here is on the low side.`
   );
   update();
 }
