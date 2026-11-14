@@ -315,6 +315,27 @@ Taking out Diwali night removes 0.57% of all the PM2.5 Jammu breathed this year,
 
 Switch the widget to PM10 and it tells the same story. Taking out Diwali night moves the year's PM10 average from 74.0 µg/m³ to 73.6 (0.48% of the total), while a 10% cut to everyday pollution takes it to 66.6 and takes 5 days off the 59 that were over India's PM10 limit. The one place Diwali does stand out is the very worst hours. Our Jammu sensors spent 6 hours this year above 424 µg/m³ of PM10, the EPA's "Hazardous", and 4 of them were on Diwali night.
 
+
+It's worth slowing down on what "0.57% of the year" actually means, because it's the same trap as the daily averages earlier. Here is the sum, with the real numbers.
+
+<figure class="worked">
+<figcaption class="worked-title">Worked example: how much of Jammu's year was Diwali night?</figcaption>
+<ol class="worked-steps">
+<li><p>Add up the PM2.5 reading of every single hour we've recorded in Jammu this year. That's 7,036 hours, at an average of 59.5 µg/m³ each.</p><div class="formula"><math display="block"><mn>7,036</mn><mspace width="0.25em"/><mtext>hours</mtext><mo>×</mo><mn>59.5</mn><mo>≈</mo><mn>418,600</mn></math></div></li>
+<li><p>Now take Diwali night, 5 pm to 9 am, and for each hour work out how far it was above the normal level for that week, 131 µg/m³. From 6 pm onwards that's 67, 172, 380, 480, 495, 386, 193, 123, 91 and 7, and nothing after 3 am.</p><div class="formula"><math display="block"><mn>67</mn><mo>+</mo><mn>172</mn><mo>+</mo><mn>380</mn><mo>+</mo><mn>480</mn><mo>+</mo><mn>495</mn><mo>+</mo><mn>386</mn><mo>+</mo><mn>193</mn><mo>+</mo><mn>123</mn><mo>+</mo><mn>91</mn><mo>+</mo><mn>7</mn><mo>=</mo><mn>2,394</mn></math></div></li>
+<li><p>Divide the extra by the whole year.</p><div class="formula"><math display="block"><mfrac><mn>2,394</mn><mn>418,600</mn></mfrac><mo>≈</mo><mn>0.0057</mn><mo>=</mo><mn>0.57</mn><mo>%</mo></math></div></li>
+</ol>
+<p class="worked-result">Diwali night added about half a percent to everything Jammu breathed this year. That's what "not even 1%" means.</p>
+</figure>
+
+But that's the total, the same way 187 was the daily average. Sort the year's hours from worst to best instead, and Diwali looks completely different.
+
+<div class="chart" data-src="/data/everyone-had-an-aqi/jammu-worst-hours.json"></div>
+
+The four worst hours of Jammu's entire year were all on Diwali night, 8 pm to midnight, between 511 and 626 µg/m³. Nothing else this year came close to 626. But look at what comes straight after them. The fifth worst hour of the year was 7 pm on 18 January, at 510, barely below Diwali's fourth, followed by 8 pm that same night at 486 and 7 pm the next day at 404. Of the 30 worst hours, only 7 were Diwali, and most of the rest are ordinary January and February evenings, with no crackers anywhere, when the city was just heating, cooking and driving under a winter inversion.
+
+So both of these are true, and they don't cancel out. Diwali night was the worst air of the year, hour for hour, and it was also about half a percent of the year's total. A cracker ban would take the top of the chart off. It wouldn't touch the 23 other hours on it, or the thousands of hours below them.
+
 The flip side of that argument, that a few hours at 700 are worse than months at 200, gets the trade the wrong way round, because months at 200 is what we already have. Jammu was within the WHO's daily guideline on 2 of the 292 days we recorded, and over India's own, much looser, limit on 94 of them.
 
 ### "Other countries burn fireworks too, and nobody complains"
