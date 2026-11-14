@@ -236,6 +236,12 @@ To be fair to CPCB, here's a case that goes the other way. Leh's official statio
 
 ## Diwali, by the numbers
 
+Two quick things before the numbers, because a few people asked after reading the first version of this.
+
+First, which pollutant is the AQI actually about? Whichever one is worst at the time, since the index is the highest of its sub-indices. For the official stations here, that mostly turns out to be PM10, the coarser dust. CPCB's bulletin named PM10 as Srinagar's main pollutant on four of the five days around Diwali, and across Jammu's ten manual stations this year, PM10 works out to an Indian AQI of about 92 against about 71 for PM2.5. Our sensors almost always land on PM2.5 instead. PM10 decided our Jammu AQI in only 362 of the 7,036 hours we recorded this year, nearly all of them in the dusty months of April to June, and on Diwali night it was PM2.5 every single hour. Part of that is real (smoke is mostly fine particles), and part of it is our laser sensors undercounting coarse dust. Either way, it's one more reason an official AQI and ours can disagree for the same air - quite often they aren't even about the same pollutant.
+
+Second, why this post is almost all PM2.5. PM10 is mostly dust and a lot of it stops in your nose and upper airways. PM2.5 gets into the deepest part of your lungs and into your blood, and it's the one tied most strongly to the long-term harm, the heart and lung disease and the years of life lost ([WHO, 2021](https://www.winchester.gov.uk/assets/attach/31475/9789240034228-eng.pdf)). Crackers, heating, cooking fires and exhaust all put out mostly PM2.5. Over a year, it's PM2.5 that does most of the damage, so that's the one we watch hardest. PM10 still shows up below, wherever it changes the picture.
+
 Here's Diwali night at our four Jammu sensors, every 15 minutes.
 
 <div class="chart" data-src="/data/everyone-had-an-aqi/jammu-diwali-nodes.json"></div>
@@ -291,6 +297,8 @@ This one you can check yourself. Below is every hour we've recorded in Jammu thi
 <div class="widget" data-widget="year" data-src="/data/everyone-had-an-aqi/jammu-year.json"></div>
 
 Taking out Diwali night removes 0.57% of all the PM2.5 Jammu breathed this year, and the year's average goes from 59.5 µg/m³ to 59.2. Cutting everyday pollution by just 10% takes it to 53.2, takes 13 days off the 94 that were over India's limit, and halves the hours spent above 225 µg/m³ (from 44 to 22). So for the year's total, "not even 1%" holds up.
+
+Switch the widget to PM10 and it tells the same story. Taking out Diwali night moves the year's PM10 average from 74.0 µg/m³ to 73.6 (0.48% of the total), while a 10% cut to everyday pollution takes it to 66.6 and takes 5 days off the 59 that were over India's PM10 limit. The one place Diwali does stand out is the very worst hours. Our Jammu sensors spent 6 hours this year above 424 µg/m³ of PM10, the EPA's "Hazardous", and 4 of them were on Diwali night.
 
 The flip side of that argument, that a few hours at 700 are worse than months at 200, gets the trade the wrong way round, because months at 200 is what we already have. Jammu was within the WHO's daily guideline on 2 of the 292 days we recorded, and over India's own, much looser, limit on 94 of them.
 
