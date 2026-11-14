@@ -280,11 +280,26 @@ In the real data it looks like that, too. Gandhi Nagar fell from 907 to 345 in a
 
 ### "The air was fine until people started bursting crackers"
 
-Here's every day of the last month.
+Here's every day of the last month. There are two bars for each day, and the gap between them is worth slowing down for, because it's the easiest thing in this whole post to misread.
 
 <div class="chart" data-src="/data/everyone-had-an-aqi/jammu-daily.json"></div>
 
-The jump happened on 30 and 31 October, from 71 µg/m³ to 177, more than a week before Diwali. No crackers were involved. Diwali day itself averaged 187, which is the worst day of the year so far, but only just. 31 October was 177 and 1 November was 173.
+The blue bar is the day's average, every hour from midnight to midnight added up and divided by 24. The orange bar is the single worst hour of that same day. On an ordinary day in Jammu, the worst hour is about twice the average, and it almost always lands between 7 and 8 in the evening. On Diwali, the average was 187 µg/m³ and the worst hour was 626. The worst 15 minutes at any one sensor were higher again, 907 at Gandhi Nagar, as you saw in the chart further up.
+
+So which one is "the Diwali number"? Both, and that's exactly how a single number ends up misleading people. An average spreads a few terrible hours across a whole day. On 8 November, the crackers really only ran from about 6 pm to midnight, and the other 18 hours looked like any other bad November day. Those ordinary hours pull the average a long way down.
+
+<figure class="worked">
+<figcaption class="worked-title">Worked example: how 8 November averaged out to 187</figcaption>
+<ol class="worked-steps">
+<li><p>The six hours from 6 pm to midnight, with the crackers going, averaged 461 µg/m³. The other eighteen hours of the day averaged 95.</p></li>
+<li><p>Add up all 24 hours and divide by 24.</p><div class="formula"><math display="block"><mfrac><mrow><mn>18</mn><mo>×</mo><mn>95</mn><mo>+</mo><mn>6</mn><mo>×</mo><mn>461</mn></mrow><mn>24</mn></mfrac><mo>=</mo><mfrac><mrow><mn>1,710</mn><mo>+</mo><mn>2,766</mn></mrow><mn>24</mn></mfrac><mo>≈</mo><mn>187</mn></math></div></li>
+</ol>
+<p class="worked-result">Six awful hours and eighteen ordinary ones make a day of 187, even though no single hour of that evening was anywhere near 187.</p>
+</figure>
+
+The other side of it is that the average is also roughly what your body got over the day, which is why health limits (and CPCB's AQI) are written as 24-hour averages. Neither number is the fake one. The worst hour tells you how bad it got, and the average tells you how much you breathed. Whenever you see one PM2.5 or AQI number, it's worth asking which of the two it is. That goes for this post as well. Wherever I say a day "averaged" something, the worst hour of that day was usually about double.
+
+The jump happened on 30 and 31 October, from 71 µg/m³ to 177 (as daily averages), more than a week before Diwali. No crackers were involved. By its average, Diwali day was the worst day of the year so far, but only just, at 187 against 177 on 31 October and 173 on 1 November. By its worst hour, it wasn't close. 626 is nearly twice the next worst hour of the month (324, just after midnight on that same night), and well over twice anything outside Diwali (262, at 7 pm on 7 November).
 
 I tried to work out what caused that jump, and I can only explain part of it. The wind dropped by about a third over those nights (from 6.7 km/h on the night of the 29th to 4.4 on the 30th and 3.3 by 1 November), which on its own would push the level up by roughly half, using the same tank maths. It went up by two and a half times. Late October is also when farm fires in Punjab ramp up (its pollution board had counted [717 by 27 October](https://www.socialnews.xyz/2026/10/27/punjab-reports-over-700-stubble-burning-incidents-24-firs-registered/)), and Jammu is right next door, but I can't prove from ground sensors alone how much of that smoke reached us. What I can say is that whatever it was, it started a week before Diwali and was still there a week after.
 
