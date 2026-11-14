@@ -337,6 +337,16 @@ The four worst hours of Jammu's entire year were all on Diwali night, 8 pm to mi
 
 Srinagar makes the same point even more clearly, and it's worth spelling out, because every November someone there blames the bad air on Diwali crackers. Doing the same sums with our Srinagar sensors, Diwali night added about 0.29% of all the PM2.5 they recorded this year. Not one of Srinagar's 30 worst hours this year was on Diwali night. The worst hour that night was 148 µg/m³, while the worst hour of the year was 332, at 7 pm on 19 January, with no crackers anywhere. By daily average, 8 November was only Srinagar's fourth worst day. The two days after it (10 November at 143 and 9 November at 136) were worse, when the heating season started properly, and so was 19 January (138). And the air had been getting worse for months before Diwali came anywhere near it, from 15 µg/m³ on average in April to 33 in September, 59 in October and 87 so far in November. In Kashmir, the winter air comes from how people keep warm, which the [heating section further down](#why-it-keeps-getting-worse) goes into.
 
+Here's Srinagar's year sorted the same way as Jammu's above. Diwali night would show up in orange, and there's nothing orange on it.
+
+<div class="chart" data-src="/data/everyone-had-an-aqi/srinagar-worst-hours.json"></div>
+
+And here's the same take-Diwali-out exercise, with Srinagar's own data. Try taking Diwali night out, then try cutting everyday pollution by even 5%, and compare what each does to the year.
+
+<div class="widget" data-widget="year" data-src="/data/everyone-had-an-aqi/srinagar-year.json"></div>
+
+Taking Diwali night out moves Srinagar's year from 34.8 µg/m³ to 34.7, and doesn't touch a single one of its 6 "Hazardous" hours or its 46 days over India's limit. Cutting everyday pollution by just 5% takes the year to 33.0, takes 3 days off those 46, and adds 8 days within the WHO's guideline.
+
 So both of these are true, and they don't cancel out. Diwali night was the worst air of the year, hour for hour, and it was also about two thirds of a percent of the year's total. A cracker ban would take the top of the chart off. It wouldn't touch the 23 other hours on it, or the thousands of hours below them.
 
 The flip side of that argument, that a few hours at 700 are worse than months at 200, gets the trade the wrong way round, because months at 200 is what we already have. Jammu was within the WHO's daily guideline on 2 of the 292 days we recorded, and over India's own, much looser, limit on 86 of them.

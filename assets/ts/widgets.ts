@@ -1165,7 +1165,7 @@ async function yearWidget(figure: HTMLElement, source: string): Promise<void> {
   figure.append(controls, plotHost, readout.root);
   foot(
     figure,
-    `Source: Breathe ground sensors in Jammu (AirGradient), 18 January to 13 November 2026. "Taking out Diwali" caps 5 pm on 8 November to 9 am on 9 November at the week's average, ${data.baseline} µg/m³ of PM2.5 and ${data.baseline10} of PM10. Limits are 24-hour ones. Our laser sensors undercount coarse dust, so the PM10 here is on the low side.`
+    `Source: Breathe ground sensors in ${data.name} (AirGradient), ${day(data.start)} to ${day(data.start + (data.values.length - 1) * data.step)} 2026. "Taking out Diwali" caps 5 pm on 8 November to 9 am on 9 November at the week's average, ${data.baseline} µg/m³ of PM2.5 and ${data.baseline10} of PM10. Limits are 24-hour ones. Our laser sensors undercount coarse dust, so the PM10 here is on the low side.`
   );
   update();
 }
