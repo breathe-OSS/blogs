@@ -604,7 +604,7 @@ function scaleWidget(figure: HTMLElement): void {
     );
   };
 
-  const control = slider('PM2.5', 0, 1000, 0.5, 131, 'µg/m³', update);
+  const control = slider('PM2.5', 0, 1100, 0.5, 121, 'µg/m³', update);
   const jump = (value: number): void => {
     control.set(value);
     update(value);
@@ -615,9 +615,9 @@ function scaleWidget(figure: HTMLElement): void {
       [
         ['Leh in July, 3.3', () => jump(3.3)],
         ["Srinagar's bulletin, 11.4", () => jump(11.4)],
-        ['Jammu, week before Diwali, 131', () => jump(131)],
+        ['Jammu, week before Diwali, 121', () => jump(121)],
         ['An AQI.in "1000", 576', () => jump(576)],
-        ['Gandhi Nagar, Diwali 9:30 pm, 907', () => jump(906.5)],
+        ['Suchetgarh, Diwali 11:30 pm, 1,037', () => jump(1036.7)],
       ],
       'Real readings'
     )
@@ -627,7 +627,7 @@ function scaleWidget(figure: HTMLElement): void {
     figure,
     'Breakpoints from CPCB (2015) and the US EPA (2024). The 22 µg/m³ per cigarette rule is from Berkeley Earth (2015).'
   );
-  update(131);
+  update(121);
 }
 
 interface Series15 {
@@ -667,7 +667,7 @@ async function windowWidget(figure: HTMLElement, source: string): Promise<void> 
   const data = (await (await fetch(source)).json()) as Series15;
   const time = (index: number): number => data.start + index * data.step;
   const diwali = data.values.findIndex(
-    (_, index) => day(time(index)) === '8 Nov' && clock(time(index)) === '9:30 pm'
+    (_, index) => day(time(index)) === '8 Nov' && clock(time(index)) === '8:30 pm'
   );
   head(
     figure,
@@ -712,7 +712,7 @@ async function windowWidget(figure: HTMLElement, source: string): Promise<void> 
     readout.set([
       ['Highest value', `${fmt(peak)} µg/m³`, `${day(time(peakIndex))}, ${clock(time(peakIndex))}`],
       [
-        'At 9:30 pm on Diwali',
+        'At 8:30 pm on Diwali',
         atDiwali === null ? 'no data' : `${fmt(atDiwali)} µg/m³`,
         atDiwali === null ? '' : `US AQI ${epaAqi(atDiwali)}, stretched ${stretchedAqi(atDiwali)}`,
       ],
@@ -744,7 +744,7 @@ async function windowWidget(figure: HTMLElement, source: string): Promise<void> 
 function tankWidget(figure: HTMLElement): void {
   const city = 10;
   const leak = 1.5;
-  const everyday = (131 * (4.5 + leak)) / city;
+  const everyday = (121 * (4.5 + leak)) / city;
   const burstPeak = 560;
   const step = 1 / 60;
   const hours = 24;
@@ -870,7 +870,7 @@ function tankWidget(figure: HTMLElement): void {
   figure.append(controls, plotHost, readout.root);
   foot(
     figure,
-    "A one-box model with a 10 km city. Everyday sources are tuned so 4.5 km/h of wind gives Jammu's pre-Diwali average of 131 µg/m³. It ignores the night lid, rain and everything else, on purpose."
+    "A one-box model with a 10 km city. Everyday sources are tuned so 4.5 km/h of wind gives Jammu's pre-Diwali average of 121 µg/m³. It ignores the night lid, rain and everything else, on purpose."
   );
   update();
 }
@@ -1179,7 +1179,7 @@ function doseWidget(figure: HTMLElement): void {
   const rates: Record<string, number> = { rest: 0.26, light: 0.72, active: 1.6 };
   const daily = 16;
   const who = 15;
-  let concentration = 600;
+  let concentration = 500;
   let hours = 4;
   let activity = 'light';
   const readout = stats();
@@ -1188,7 +1188,7 @@ function doseWidget(figure: HTMLElement): void {
     const breathed = rates[activity] * hours;
     const dose = breathed * concentration;
     const whoDay = who * daily;
-    const jammuDay = 131 * daily;
+    const jammuDay = 121 * daily;
     readout.set([
       [
         'Air you breathed',
@@ -1247,8 +1247,8 @@ function doseWidget(figure: HTMLElement): void {
     ),
     presets(
       [
-        ['Diwali evening outside in Jammu', () => pick(600, 4)],
-        ['A whole November day in Jammu', () => pick(131, 24)],
+        ['Diwali evening outside in Jammu', () => pick(500, 4)],
+        ['A whole November day in Jammu', () => pick(121, 24)],
         ['A whole July day in Leh', () => pick(3.3, 24)],
         ['A morning walk in Srinagar', () => pick(150, 1)],
       ],

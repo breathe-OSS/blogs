@@ -61,7 +61,7 @@ India's table ([CPCB, 2015](https://www.tribuneindia.com/news/india/pollution-co
 
 Now look at the bottom of both tables. The EPA's last row ends at 325.4 µg/m³, which is an AQI of 500. Anything above that, the EPA [calls "Beyond the AQI"](https://forum.airnowtech.org/t/the-aqi-equation/169) and stops counting. India's last row ends at 380 µg/m³, also 500. So where does 1000 come from?
 
-Somebody keeps drawing the last line. We went through six months of AQI.in's data from one of its sensors in Jammu, and its "US AQI" above 500 is just the EPA's last row extended in a straight line forever. By that rule, an AQI of 1000 is about 576 µg/m³, and our worst 15 minutes in Jammu on Diwali (709 µg/m³ averaged across the city, more on that later) would show up as roughly 1270. The air is real. The scale past 500 is something an app made up, and different apps make it up differently, which is part of how Apple can show 1290 for a city where AQI.in shows 166.
+Somebody keeps drawing the last line. We went through six months of AQI.in's data from one of its sensors in Jammu, and its "US AQI" above 500 is just the EPA's last row extended in a straight line forever. By that rule, an AQI of 1000 is about 576 µg/m³, and our worst 15 minutes in Jammu on Diwali (764 µg/m³ averaged across the city, more on that later) would show up as roughly 1380. The air is real. The scale past 500 is something an app made up, and different apps make it up differently, which is part of how Apple can show 1290 for a city where AQI.in shows 166.
 
 On 10 November, CPCB put out a statement defending its own cap ([The Tribune](https://www.tribuneindia.com/news/india/pollution-control-board-defends-aqi-methodology-amid-discrepancies-with-private-platforms/)). It said 500 is the top of the scale on purpose (everything above it is "Severe" anyway, so a bigger number wouldn't change the health advice), that the gap with private apps comes from "variations in measurement techniques and averaging periods, and not under-reporting", and one more thing that's easy to miss. Its particle analysers were installed in 2015 and calibrated for 0 to 1000 µg/m³, and any hourly reading above that range gets thrown out by automatic validation. On the worst nights of the year, the official network literally drops the worst hours. CPCB says it's reviewing this.
 
@@ -75,7 +75,7 @@ Here's the whole thing in one place, with one more yardstick from [Berkeley Eart
 
 The other half of the disagreement is time. India's AQI (and the EPA's) is defined on a 24-hour average for PM2.5, because the health research behind those tables is about whole days of breathing. A lot of apps take a single recent reading and push it through the same 24-hour table anyway. We checked this for AQI.in, and its "US AQI" matches the EPA formula applied to the raw reading at that moment almost exactly (the median difference was 0.19).
 
-Neither of these is wrong, they're just different questions. "What's the air like right now?" and "how bad was the last day of breathing?" give very different answers on a night like Diwali. At Gandhi Nagar in Jammu, the 15-minute reading at 9:30 pm was 907 µg/m³. Averaged over an hour, the worst you'd see is 608. Over 8 hours it's 340, at 1:15 am. Over 24 hours, the way CPCB does it, the number peaks at 186... at 5:15 pm the *next* day, long after the smoke had gone. At 9:30 pm on Diwali itself, while the air outside was at its worst, the 24-hour average still said 136.
+Neither of these is wrong, they're just different questions. "What's the air like right now?" and "how bad was the last day of breathing?" give very different answers on a night like Diwali. At Gandhi Nagar in Jammu, the worst 15-minute reading was 861 µg/m³, at 8:30 pm. Averaged over an hour, the worst you'd see is 605. Over 8 hours it's 342, at 1:15 am. Over 24 hours, the way CPCB does it, the number peaks at 184... at 5:15 pm the *next* day, long after the smoke had gone. At 8:30 pm on Diwali itself, while the air outside was at its worst, the 24-hour average still said 114.
 
 Switch between them here. This is our real data for that week.
 
@@ -93,13 +93,13 @@ The US EPA keeps a big reference of how much air people breathe ([Exposure Facto
 <figcaption class="worked-title">Worked example: four hours outside on Diwali night in Jammu</figcaption>
 <ol class="worked-steps">
 <li><p>How much air did you breathe? Standing around watching crackers is light activity, about 0.72 m³ an hour.</p><div class="formula"><math display="block"><mn>0.72</mn><mspace width="0.25em"/><mtext>m³ an hour</mtext><mo>×</mo><mn>4</mn><mspace width="0.25em"/><mtext>hours</mtext><mo>≈</mo><mn>2.9</mn><mspace width="0.25em"/><mtext>m³</mtext></math></div></li>
-<li><p>How much PM2.5 came with it? The air averaged about 600 µg/m³ that evening.</p><div class="formula"><math display="block"><mn>2.9</mn><mspace width="0.25em"/><mtext>m³</mtext><mo>×</mo><mn>600</mn><mspace width="0.25em"/><mtext>µg/m³</mtext><mo>≈</mo><mn>1,730</mn><mspace width="0.25em"/><mtext>µg</mtext></math></div></li>
-<li><p>Compare it with a whole day of air at the WHO guideline, and with an ordinary early November day in Jammu, at 16 m³ of air a day.</p><div class="formula"><math display="block"><mn>15</mn><mo>×</mo><mn>16</mn><mo>=</mo><mn>240</mn><mspace width="0.25em"/><mtext>µg</mtext><mspace width="1.5em"/><mn>131</mn><mo>×</mo><mn>16</mn><mo>≈</mo><mn>2,100</mn><mspace width="0.25em"/><mtext>µg</mtext></math></div></li>
+<li><p>How much PM2.5 came with it? The air averaged about 500 µg/m³ that evening.</p><div class="formula"><math display="block"><mn>2.9</mn><mspace width="0.25em"/><mtext>m³</mtext><mo>×</mo><mn>500</mn><mspace width="0.25em"/><mtext>µg/m³</mtext><mo>≈</mo><mn>1,450</mn><mspace width="0.25em"/><mtext>µg</mtext></math></div></li>
+<li><p>Compare it with a whole day of air at the WHO guideline, and with an ordinary early November day in Jammu, at 16 m³ of air a day.</p><div class="formula"><math display="block"><mn>15</mn><mo>×</mo><mn>16</mn><mo>=</mo><mn>240</mn><mspace width="0.25em"/><mtext>µg</mtext><mspace width="1.5em"/><mn>121</mn><mo>×</mo><mn>16</mn><mo>≈</mo><mn>1,940</mn><mspace width="0.25em"/><mtext>µg</mtext></math></div></li>
 </ol>
-<p class="worked-result">That evening is about 7 WHO-days of PM2.5. An ordinary day in Jammu right now is about 9.</p>
+<p class="worked-result">That evening is about 6 WHO-days of PM2.5. An ordinary day in Jammu right now is about 8.</p>
 </figure>
 
-Four hours on a terrace on Diwali night put about seven WHO-days of PM2.5 into you. That sounds awful, and it is. But look at the line under it. An *ordinary* day in Jammu in early November, with no crackers anywhere, is about nine WHO-days, every day, for weeks. That comparison is going to come up again, so keep it in your head.
+Four hours on a terrace on Diwali night put about six WHO-days of PM2.5 into you. That sounds awful, and it is. But look at the line under it. An *ordinary* day in Jammu in early November, with no crackers anywhere, is about eight WHO-days, every day, for weeks. That comparison is going to come up again, so keep it in your head.
 
 Try your own.
 
@@ -135,7 +135,7 @@ The other weak spot is big particles. Laser sensors are tuned for fine particles
 
 I'll be honest about our own data here too. When we went through AirGradient's exports for our network this month, we found that its "corrected" PM2.5 didn't mean the same thing on every sensor. AirGradient lets each sensor pick its own correction. Some of ours had the EPA formula, and the rest had a correction made for their sensor batch, which only kicks in when the air is fairly clean (under about 31 µg/m³), so through most of the winter they were effectively reporting raw numbers. At Billawar, which has EPA, raw data puts 7 of 9 days over India's daily limit, and the corrected numbers put 1. So two sensors breathing the same air could come out quite differently depending on a setting.
 
-Since 14 November, our API puts every sensor on the EPA formula. If AirGradient has already applied it to a reading, we keep their number, and if it hasn't, we work it out ourselves from the sensor's raw reading and humidity. Our stored history has been through the same thing. The charts in this post were pulled before that change, so most of the Jammu numbers in them are close to raw. With the correction, an ordinary Jammu day comes out roughly a fifth lower, and the very worst Diwali minutes come out *higher*, because above about 340 µg/m³ the formula goes up. None of the comparisons in this post flip either way.
+Since 14 November, our API puts every sensor on the EPA formula. It works out, day by day, whether AirGradient was already applying EPA to a sensor. If it was, we keep AirGradient's numbers, and if it wasn't, we work EPA out ourselves from the sensor's raw reading and humidity. Our stored history has been through the same thing, and every chart and number in this post uses the corrected data. Compared to the old numbers, an ordinary Jammu day came out a little lower, and the very worst Diwali minutes came out *higher*, because above about 340 µg/m³ the formula goes up. The one gap is Leh, Samba and Kargil, whose sensors we read from AirGradient's public feed. Raw readings from those only go back to 12 November, so their Diwali numbers are still AirGradient's own.
 
 What low-cost sensors ARE very good at is *when* and *where*. Two sensors from different companies in Gandhi Nagar rose and fell together almost perfectly (a correlation of 0.96, where 1 is perfect lockstep), and at Kanipora it was 0.995 for daily averages. They argue about how much, and they almost never argue about which hour was the worst one.
 
@@ -148,7 +148,7 @@ That "correlation" number comes up a lot in arguments about sensors, so here's w
 
 These two rise and fall at exactly the same moments, so their correlation is a perfect 1. But B reads half of A every single time. So to compare two sensors you need two numbers. The correlation tells you whether they see the same events, and the ratio (B divided by A, here 0.5) tells you how far apart their levels are.
 
-That's why the AQI.in comparisons above have both a correlation and a percentage. The sensors saw the same events (high correlation), and disagreed on how big those events were (the percentages). It's also why a model with a correlation of 0.33 against our Jammu sensors, which we'll get to next, is a bigger problem than a sensor that reads 20% high. A sensor that reads 20% high still tells you *when* to close the windows.
+That's why the AQI.in comparisons above have both a correlation and a percentage. The sensors saw the same events (high correlation), and disagreed on how big those events were (the percentages). It's also why a model with a correlation of 0.32 against our Jammu sensors, which we'll get to next, is a bigger problem than a sensor that reads 20% high. A sensor that reads 20% high still tells you *when* to close the windows.
 
 ## Why every app shows a different number
 
@@ -160,7 +160,7 @@ I can't download Google's or Apple's numbers to check them against ours, but I c
 
 <div class="chart" data-src="/data/everyone-had-an-aqi/model-vs-sensors.json"></div>
 
-In Jammu, the model averaged 40 µg/m³ over those six weeks. Our sensors averaged 91. On Diwali night, the model's worst hour in Jammu was 58 µg/m³, and ours was 626. The model's worst day in all six weeks was 5 October, which wasn't even in our top ten, and its daily numbers barely move together with ours (a correlation of 0.33). In Srinagar it did better on the *shape* of things (0.76), rising and falling roughly when our sensors did, but it still came in at about half the level, 38 against 70. In Leh, the model's Diwali peak was 8. Ours was 123.
+In Jammu, the model averaged 40 µg/m³ over those six weeks. Our sensors averaged 84. On Diwali night, the model's worst hour in Jammu was 58 µg/m³, and ours was 680. The model's worst day in all six weeks was 5 October, which wasn't even in our top ten, and its daily numbers barely move together with ours (a correlation of 0.32). In Srinagar it did better on the *shape* of things (0.76), rising and falling roughly when our sensors did, but it still came in at about half the level, 38 against 68. In Leh, the model's Diwali peak was 8. Ours was 123.
 
 That isn't because the people who build CAMS don't know what they're doing. A global model works with emissions inventories (estimates of how much each place burns, built years in advance), weather, and satellite pictures of haze from above, and a grid square tens of kilometres wide. It has no way of knowing that a few thousand houses in one city are bursting crackers on one particular night, or that a whole valley switched on its bukharis this week. And in Jammu, where there isn't a single live government monitor for a model to learn from, there's nothing on the ground to pull it back towards reality.
 
@@ -180,7 +180,7 @@ Diwali night itself showed the same thing. Averaged over the night, AQI.in's Gan
 
 ### The rankings
 
-And then there were the rankings. A post that did the rounds on 11 November listed the "Top 10 states with the highest and lowest AQI", with Mizoram at 1, Ladakh at 71 and J&K at 75. A state doesn't have an AQI. Averaging Jammu (125 µg/m³ that day by our sensors) with clean hill sensors gives you a number nobody in either place is breathing, and a state-wide AQI of 1 is a dead or empty station, not clean air. City rankings have the same problem in a smaller way, which brings us to the official numbers.
+And then there were the rankings. A post that did the rounds on 11 November listed the "Top 10 states with the highest and lowest AQI", with Mizoram at 1, Ladakh at 71 and J&K at 75. A state doesn't have an AQI. Averaging Jammu (122 µg/m³ that day by our sensors) with clean hill sensors gives you a number nobody in either place is breathing, and a state-wide AQI of 1 is a dead or empty station, not clean air. City rankings have the same problem in a smaller way, which brings us to the official numbers.
 
 ## What the government actually publishes here
 
@@ -194,7 +194,7 @@ What Jammu has is manual stations. News reports usually mention five of them (Na
 
 I expected the official numbers to just be lower, and in winter they are, about half of ours in January and February. But from April to June, Narwal is *higher* than our sensors. The official line is flatter. It sees less of the winter spike and more of the summer dust (which makes sense, since our laser sensors undercount coarse dust, and one fixed station in Narwal isn't four sensors spread across the city). So "the government sensors always undervalue" isn't quite right either. They measure something different, much less often, in fewer places, and November's figure was already published on the 13th as if the month was over.
 
-Averaged across all nine stations, January to October, the official PM2.5 for Jammu comes out at 42.5 µg/m³. Our four sensors, over the same months, average 61.5. That's the honest version of "the government numbers are lower". Lower, yes, by about a third, mostly in winter, and not uniformly.
+Averaged across all nine stations, January to October, the official PM2.5 for Jammu comes out at 42.5 µg/m³. Our four sensors, over the same months, average 59.6. That's the honest version of "the government numbers are lower". Lower, yes, by a bit under a third, mostly in winter, and not uniformly.
 
 Where the official network is genuinely useful is PM10, the coarse dust that our laser sensors are bad at. Every one of those nine stations was above India's annual PM10 limit (60 µg/m³) in at least 8 of the 10 months this year, and five of them (Narwal, Bikram Chowk, Janipur, Dogra Hall and Bantalab) were above it every single month. The nine stations together average 92 µg/m³ of PM10, and Bikram Chowk averages 120. If you live in Jammu, that's the dust you can see on every windowsill, and it's there in July as much as in January. On this one, I'd trust their filters over our lasers.
 
@@ -214,7 +214,7 @@ Srinagar is where it gets hard to defend. Here are CPCB's daily bulletins for Sr
 
 <div class="chart" data-src="/data/everyone-had-an-aqi/srinagar-bulletin.json"></div>
 
-On 10 November, the bulletin gave Srinagar a 40, "Good", worked out from one of its two stations. The next day, the J&K pollution control body [told Greater Kashmir](https://www.greaterkashmir.com/kashmir/cpcb-defends-aqi-reporting-methodology-amid-post-diwali-controversy-12802317) that the readings circulating online "are not reliable" and that its stations showed "good" air in Srinagar. Our five sensors averaged 332 on the Indian scale, "Very poor", and the cleanest of them (Hazratbal) was 236, "Poor". On 12 November, the bulletin's 19 (the number in that "least polluted cities" post) came from one station, and the pollutant driving it was NO2, which means PM2.5 at that station was either very low or not counted. Our sensors averaged 175.
+On 10 November, the bulletin gave Srinagar a 40, "Good", worked out from one of its two stations. The next day, the J&K pollution control body [told Greater Kashmir](https://www.greaterkashmir.com/kashmir/cpcb-defends-aqi-reporting-methodology-amid-post-diwali-controversy-12802317) that the readings circulating online "are not reliable" and that its stations showed "good" air in Srinagar. Our five sensors averaged 331 on the Indian scale, "Very poor", and the cleanest of them (Hazratbal) was 236, "Poor". On 12 November, the bulletin's 19 (the number in that "least polluted cities" post) came from one station, and the pollutant driving it was NO2, which means PM2.5 at that station was either very low or not counted. Our sensors averaged 168.
 
 Before anyone says "those are just cheap sensors", take 40% off every one of our readings for the humidity problem from earlier. 10 November still comes out "Poor". Five sensors across the city, Hazratbal to Kanipora, don't all fail in the same direction by that much.
 
@@ -228,17 +228,17 @@ How different can two parts of the same city be? Here are the cleanest and the d
 
 <div class="chart" data-src="/data/everyone-had-an-aqi/srinagar-spread.json"></div>
 
-On every one of those days, Srinagar's dirtiest sensor read somewhere between 1.6 and 2.6 times its cleanest. That's not noise, because it shows up day after day in the same direction. I don't know exactly why each spot is the way it is (my guess is that Hazratbal, up by the lake with more open space, gets more wind, while Brein Nishat and Kanipora have more houses around them burning things to stay warm), but the difference is real. Jammu's four sensors are closer together in level (the dirtiest read 1.3 to 2.0 times the cleanest over the Diwali week), probably because the plains mix more evenly than a valley does, but even there, "the AQI in Jammu" is an average over places that are breathing quite different air. And the model, as a single dashed line, sits below even our *cleanest* Srinagar sensor on 9 of those 12 days.
+On every one of those days, Srinagar's dirtiest sensor read somewhere between 1.6 and 2.5 times its cleanest. That's not noise, because it shows up day after day in the same direction. I don't know exactly why each spot is the way it is (my guess is that Hazratbal, up by the lake with more open space, gets more wind, while Brein Nishat and Kanipora have more houses around them burning things to stay warm), but the difference is real. Jammu's four sensors are closer together in level (the dirtiest read 1.3 to 2.0 times the cleanest over the Diwali week), probably because the plains mix more evenly than a valley does, but even there, "the AQI in Jammu" is an average over places that are breathing quite different air. And the model, as a single dashed line, sits below even our *cleanest* Srinagar sensor on 9 of those 12 days.
 
 ### Where they agree
 
-To be fair to CPCB, here's a case that goes the other way. Leh's official station at Skara Yokma is about 2 km from our sensor at Zero Waste Ladakh. Over the 24 hours to 9 pm on 13 November, CPCB's feed gave the station a PM2.5 figure of 13, with a maximum of 27. Our sensor averaged 10, with a maximum of 46. That's a reference instrument and a laser sensor agreeing pretty well, in a small town on a clean day with a lot of wind. When the air is clean and even, everybody's number comes out close. It's on the bad nights, in crowded cities, in valleys, with one station per city, that the numbers come apart, which is exactly when people go looking for them.
+To be fair to CPCB, here's a case that goes the other way. Leh's official station at Skara Yokma is about 2 km from our sensor at Zero Waste Ladakh. Over the 24 hours to 9 pm on 13 November, CPCB's feed gave the station a PM2.5 figure of 13, with a maximum of 27. Our sensor averaged 9, with a maximum of 37. That's a reference instrument and a laser sensor agreeing pretty well, in a small town on a clean day with a lot of wind. When the air is clean and even, everybody's number comes out close. It's on the bad nights, in crowded cities, in valleys, with one station per city, that the numbers come apart, which is exactly when people go looking for them.
 
 ## Diwali, by the numbers
 
 Two quick things before the numbers, because a few people asked after reading the first version of this.
 
-First, which pollutant is the AQI actually about? Whichever one is worst at the time, since the index is the highest of its sub-indices. For the official stations here, that mostly turns out to be PM10, the coarser dust. CPCB's bulletin named PM10 as Srinagar's main pollutant on four of the five days around Diwali, and across Jammu's ten manual stations this year, PM10 works out to an Indian AQI of about 92 against about 71 for PM2.5. Our sensors almost always land on PM2.5 instead. PM10 decided our Jammu AQI in only 362 of the 7,036 hours we recorded this year, nearly all of them in the dusty months of April to June, and on Diwali night it was PM2.5 every single hour. Part of that is real (smoke is mostly fine particles), and part of it is our laser sensors undercounting coarse dust. Either way, it's one more reason an official AQI and ours can disagree for the same air - quite often they aren't even about the same pollutant.
+First, which pollutant is the AQI actually about? Whichever one is worst at the time, since the index is the highest of its sub-indices. For the official stations here, that mostly turns out to be PM10, the coarser dust. CPCB's bulletin named PM10 as Srinagar's main pollutant on four of the five days around Diwali, and across Jammu's ten manual stations this year, PM10 works out to an Indian AQI of about 92 against about 71 for PM2.5. Our sensors almost always land on PM2.5 instead. PM10 decided our Jammu AQI in only 663 of the 7,038 hours we recorded this year, about half of them in the dusty months of April to June, and on Diwali night it was PM2.5 every single hour. Part of that is real (smoke is mostly fine particles), and part of it is our laser sensors undercounting coarse dust. Either way, it's one more reason an official AQI and ours can disagree for the same air - quite often they aren't even about the same pollutant.
 
 Second, why this post is almost all PM2.5. PM10 is mostly dust and a lot of it stops in your nose and upper airways. PM2.5 gets into the deepest part of your lungs and into your blood, and it's the one tied most strongly to the long-term harm, the heart and lung disease and the years of life lost ([WHO, 2021](https://www.winchester.gov.uk/assets/attach/31475/9789240034228-eng.pdf)). Crackers, heating, cooking fires and exhaust all put out mostly PM2.5. Over a year, it's PM2.5 that does most of the damage, so that's the one we watch hardest. PM10 still shows up below, wherever it changes the picture.
 
@@ -246,13 +246,13 @@ Here's Diwali night at our four Jammu sensors, every 15 minutes.
 
 <div class="chart" data-src="/data/everyone-had-an-aqi/jammu-diwali-nodes.json"></div>
 
-All four started climbing after 6 pm, all four were between 380 and 445 µg/m³ by 8 pm, and all four were between 564 and 907 by 9:30 pm. Talab Tillo and Suchetgarh are about 24 km apart. In the city as a whole, the night (6 pm to 6 am) averaged 327 µg/m³, against 131 for the week before. Jammu went above twice its normal level at 7:15 pm and came back under it at 1:15 am, so about six hours in all. Udhampur was a little longer, about seven. Samba, already one of the worst places we measure on an ordinary day, only spent about three hours above double, mostly because double of an already high number is a lot harder to reach.
+All four started climbing after 6 pm, all four were between 404 and 538 µg/m³ by 8 pm, and between 524 and 968 by 9:30 pm. Talab Tillo and Suchetgarh both went past 1,000 later that night, 1,012 at 10:45 pm and 1,037 at 11:30 pm. Talab Tillo and Suchetgarh are about 24 km apart. In the city as a whole, the night (6 pm to 6 am) averaged 344 µg/m³, against 121 for the week before. Jammu went above twice its normal level at 7 pm and came back under it at 2 am, so about seven hours in all. Udhampur was a little longer, about eight. Samba, already one of the worst places we measure on an ordinary day, only spent about three hours above double, mostly because double of an already high number is a lot harder to reach.
 
 It wasn't only Jammu, either.
 
 <div class="chart" data-src="/data/everyone-had-an-aqi/diwali-zones.json"></div>
 
-Doda's sensor at Kashtigarh hit 915 µg/m³, which is right up against the 1000 µg/m³ limit where CPCB's analysers would have started throwing readings away. Reasi went from 46 to 545. Udhampur and Samba, which already sit above 110 µg/m³ on an ordinary November week, peaked at 500 and 376.
+Doda's sensor at Kashtigarh hit 915 µg/m³, which is right up against the 1000 µg/m³ limit where CPCB's analysers would have started throwing readings away. Reasi went from 46 to 545. Udhampur and Samba, which already sit above 100 µg/m³ on an ordinary November week, peaked at 500 and 376.
 
 Kashmir looked different. Srinagar barely moved on Diwali night itself (its worst days came after, on the 9th and 10th, which is the heating season starting, not crackers). Kanipora, which is the one sensor we've had in Srinagar long enough to compare two Diwalis, averaged 133 µg/m³ through Diwali night in 2025 and 167 in 2026, against 96 for the week before both times. That's a bump of 40 to 75%, against Jammu's night at two and a half times its normal week. Ganderbal peaked at 132 for fifteen minutes and was back down within the hour, and Bandipora barely noticed at all.
 
@@ -276,7 +276,7 @@ Play with it. Turn the crackers off and see what's left.
 
 <div class="widget" data-widget="tank"></div>
 
-In the real data it looks like that, too. Gandhi Nagar fell from 907 to 345 in an hour and a half once people stopped bursting crackers nearby. Suchetgarh, out near the border, stayed above 500 until about 2:15 am. By 6 am, all four sensors were between 87 and 164, which is a normal November morning for Jammu.
+In the real data it looks like that, too. Gandhi Nagar peaked early, at 861 at 8:30 pm, and was down to 345 by 11 pm once people nearby stopped bursting crackers. Suchetgarh, out near the border, stayed above 500 until about 2 am. By 6 am, all four sensors were between 87 and 117, which is a normal November morning for Jammu.
 
 ### "The air was fine until people started bursting crackers"
 
@@ -284,22 +284,22 @@ Here's every day of the last month. There are two bars for each day, and the gap
 
 <div class="chart" data-src="/data/everyone-had-an-aqi/jammu-daily.json"></div>
 
-The blue bar is the day's average, every hour from midnight to midnight added up and divided by 24. The orange bar is the single worst hour of that same day. On an ordinary day in Jammu, the worst hour is about twice the average, and it almost always lands between 7 and 8 in the evening. On Diwali, the average was 187 µg/m³ and the worst hour was 626. The worst 15 minutes at any one sensor were higher again, 907 at Gandhi Nagar, as you saw in the chart further up.
+The blue bar is the day's average, every hour from midnight to midnight added up and divided by 24. The orange bar is the single worst hour of that same day. On an ordinary day in Jammu, the worst hour is about twice the average, and it almost always lands between 7 and 8 in the evening. On Diwali, the average was 190 µg/m³ and the worst hour was 680. The worst 15 minutes at any one sensor were higher again, 1,037 at Suchetgarh, as you saw in the chart further up.
 
 So which one is "the Diwali number"? Both, and that's exactly how a single number ends up misleading people. An average spreads a few terrible hours across a whole day. On 8 November, the crackers really only ran from about 6 pm to midnight, and the other 18 hours looked like any other bad November day. Those ordinary hours pull the average a long way down.
 
 <figure class="worked">
-<figcaption class="worked-title">Worked example: how 8 November averaged out to 187</figcaption>
+<figcaption class="worked-title">Worked example: how 8 November averaged out to 190</figcaption>
 <ol class="worked-steps">
-<li><p>The six hours from 6 pm to midnight, with the crackers going, averaged 461 µg/m³. The other eighteen hours of the day averaged 95.</p></li>
-<li><p>Add up all 24 hours and divide by 24.</p><div class="formula"><math display="block"><mfrac><mrow><mn>18</mn><mo>×</mo><mn>95</mn><mo>+</mo><mn>6</mn><mo>×</mo><mn>461</mn></mrow><mn>24</mn></mfrac><mo>=</mo><mfrac><mrow><mn>1,710</mn><mo>+</mo><mn>2,766</mn></mrow><mn>24</mn></mfrac><mo>≈</mo><mn>187</mn></math></div></li>
+<li><p>The six hours from 6 pm to midnight, with the crackers going, averaged 499 µg/m³. The other eighteen hours of the day averaged 87.</p></li>
+<li><p>Add up all 24 hours and divide by 24.</p><div class="formula"><math display="block"><mfrac><mrow><mn>18</mn><mo>×</mo><mn>87</mn><mo>+</mo><mn>6</mn><mo>×</mo><mn>499</mn></mrow><mn>24</mn></mfrac><mo>=</mo><mfrac><mrow><mn>1,566</mn><mo>+</mo><mn>2,994</mn></mrow><mn>24</mn></mfrac><mo>=</mo><mn>190</mn></math></div></li>
 </ol>
-<p class="worked-result">Six awful hours and eighteen ordinary ones make a day of 187, even though no single hour of that evening was anywhere near 187.</p>
+<p class="worked-result">Six awful hours and eighteen ordinary ones make a day of 190, even though no single hour of that evening was anywhere near 190.</p>
 </figure>
 
 The other side of it is that the average is also roughly what your body got over the day, which is why health limits (and CPCB's AQI) are written as 24-hour averages. Neither number is the fake one. The worst hour tells you how bad it got, and the average tells you how much you breathed. Whenever you see one PM2.5 or AQI number, it's worth asking which of the two it is. That goes for this post as well. Wherever I say a day "averaged" something, the worst hour of that day was usually about double.
 
-The jump happened on 30 and 31 October, from 71 µg/m³ to 177 (as daily averages), more than a week before Diwali. No crackers were involved. By its average, Diwali day was the worst day of the year so far, but only just, at 187 against 177 on 31 October and 173 on 1 November. By its worst hour, it wasn't close. 626 is nearly twice the next worst hour of the month (324, just after midnight on that same night), and well over twice anything outside Diwali (262, at 7 pm on 7 November).
+The jump happened on 30 and 31 October, from 65 µg/m³ to 163 (as daily averages), more than a week before Diwali. No crackers were involved. By its average, Diwali day was the worst day of the year so far, at 190, but not by much. 1 February averaged 173, and 31 October 163. By its worst hour, it wasn't close. 680 is about twice the next worst hour of the month (334, just after midnight on that same night), and two and a half times anything outside Diwali (271, at 7 pm on 7 November).
 
 I tried to work out what caused that jump, and I can only explain part of it. The wind dropped by about a third over those nights (from 6.7 km/h on the night of the 29th to 4.4 on the 30th and 3.3 by 1 November), which on its own would push the level up by roughly half, using the same tank maths. It went up by two and a half times. Late October is also when farm fires in Punjab ramp up (its pollution board had counted [717 by 27 October](https://www.socialnews.xyz/2026/10/27/punjab-reports-over-700-stubble-burning-incidents-24-firs-registered/)), and Jammu is right next door, but I can't prove from ground sensors alone how much of that smoke reached us. What I can say is that whatever it was, it started a week before Diwali and was still there a week after.
 
@@ -311,38 +311,38 @@ This one you can check yourself. Below is every hour we've recorded in Jammu thi
 
 <div class="widget" data-widget="year" data-src="/data/everyone-had-an-aqi/jammu-year.json"></div>
 
-Taking out Diwali night removes 0.57% of all the PM2.5 Jammu breathed this year, and the year's average goes from 59.5 µg/m³ to 59.2. Cutting everyday pollution by just 10% takes it to 53.2, takes 13 days off the 94 that were over India's limit, and halves the hours spent above 225 µg/m³ (from 44 to 22). So for the year's total, "not even 1%" holds up.
+Taking out Diwali night removes 0.68% of all the PM2.5 Jammu breathed this year, and the year's average goes from 57.0 µg/m³ to 56.6. Cutting everyday pollution by just 10% takes it to 51.3, takes 9 days off the 86 that were over India's limit, and takes the hours spent above 225 µg/m³ from 39 to 29. So for the year's total, "not even 1%" holds up.
 
-Switch the widget to PM10 and it tells the same story. Taking out Diwali night moves the year's PM10 average from 74.0 µg/m³ to 73.6 (0.48% of the total), while a 10% cut to everyday pollution takes it to 66.6 and takes 5 days off the 59 that were over India's PM10 limit. The one place Diwali does stand out is the very worst hours. Our Jammu sensors spent 6 hours this year above 424 µg/m³ of PM10, the EPA's "Hazardous", and 4 of them were on Diwali night.
+Switch the widget to PM10 and it tells the same story. Taking out Diwali night moves the year's PM10 average from 73.9 µg/m³ to 73.5 (about half a percent of the total), while a 10% cut to everyday pollution takes it to 66.5 and takes 5 days off the 59 that were over India's PM10 limit. The one place Diwali does stand out is the very worst hours. Our Jammu sensors spent 6 hours this year above 424 µg/m³ of PM10, the EPA's "Hazardous", and 4 of them were on Diwali night.
 
 
-It's worth slowing down on what "0.57% of the year" actually means, because it's the same trap as the daily averages earlier. Here is the sum, with the real numbers.
+It's worth slowing down on what "0.68% of the year" actually means, because it's the same trap as the daily averages earlier. Here is the sum, with the real numbers.
 
 <figure class="worked">
 <figcaption class="worked-title">Worked example: how much of Jammu's year was Diwali night?</figcaption>
 <ol class="worked-steps">
-<li><p>Add up the PM2.5 reading of every single hour we've recorded in Jammu this year. That's 7,036 hours, at an average of 59.5 µg/m³ each.</p><div class="formula"><math display="block"><mn>7,036</mn><mspace width="0.25em"/><mtext>hours</mtext><mo>×</mo><mn>59.5</mn><mo>≈</mo><mn>418,600</mn></math></div></li>
-<li><p>Now take Diwali night, 5 pm to 9 am, and for each hour work out how far it was above the normal level for that week, 131 µg/m³. From 6 pm onwards that's 67, 172, 380, 480, 495, 386, 193, 123, 91 and 7, and nothing after 3 am.</p><div class="formula"><math display="block"><mn>67</mn><mo>+</mo><mn>172</mn><mo>+</mo><mn>380</mn><mo>+</mo><mn>480</mn><mo>+</mo><mn>495</mn><mo>+</mo><mn>386</mn><mo>+</mo><mn>193</mn><mo>+</mo><mn>123</mn><mo>+</mo><mn>91</mn><mo>+</mo><mn>7</mn><mo>=</mo><mn>2,394</mn></math></div></li>
-<li><p>Divide the extra by the whole year.</p><div class="formula"><math display="block"><mfrac><mn>2,394</mn><mn>418,600</mn></mfrac><mo>≈</mo><mn>0.0057</mn><mo>=</mo><mn>0.57</mn><mo>%</mo></math></div></li>
+<li><p>Add up the PM2.5 reading of every single hour we've recorded in Jammu this year. That's 7,038 hours, at an average of 57.0 µg/m³ each.</p><div class="formula"><math display="block"><mn>7,038</mn><mspace width="0.25em"/><mtext>hours</mtext><mo>×</mo><mn>57.0</mn><mo>≈</mo><mn>401,200</mn></math></div></li>
+<li><p>Now take Diwali night, 5 pm to 9 am, and for each hour work out how far it was above the normal level for that week, 121 µg/m³. From 6 pm onwards that's 78, 177, 487, 559, 525, 440, 213, 130 and 101, and nothing from 3 am.</p><div class="formula"><math display="block"><mn>78</mn><mo>+</mo><mn>177</mn><mo>+</mo><mn>487</mn><mo>+</mo><mn>559</mn><mo>+</mo><mn>525</mn><mo>+</mo><mn>440</mn><mo>+</mo><mn>213</mn><mo>+</mo><mn>130</mn><mo>+</mo><mn>101</mn><mo>=</mo><mn>2,710</mn></math></div></li>
+<li><p>Divide the extra by the whole year.</p><div class="formula"><math display="block"><mfrac><mn>2,710</mn><mn>401,200</mn></mfrac><mo>≈</mo><mn>0.0068</mn><mo>=</mo><mn>0.68</mn><mo>%</mo></math></div></li>
 </ol>
-<p class="worked-result">Diwali night added about half a percent to everything Jammu breathed this year. That's what "not even 1%" means.</p>
+<p class="worked-result">Diwali night added about two thirds of a percent to everything Jammu breathed this year. That's what "not even 1%" means.</p>
 </figure>
 
-But that's the total, the same way 187 was the daily average. Sort the year's hours from worst to best instead, and Diwali looks completely different.
+But that's the total, the same way 190 was the daily average. Sort the year's hours from worst to best instead, and Diwali looks completely different.
 
 <div class="chart" data-src="/data/everyone-had-an-aqi/jammu-worst-hours.json"></div>
 
-The four worst hours of Jammu's entire year were all on Diwali night, 8 pm to midnight, between 511 and 626 µg/m³. Nothing else this year came close to 626. But look at what comes straight after them. The fifth worst hour of the year was 7 pm on 18 January, at 510, barely below Diwali's fourth, followed by 8 pm that same night at 486 and 7 pm the next day at 404. Of the 30 worst hours, only 7 were Diwali, and most of the rest are ordinary January and February evenings, with no crackers anywhere, when the city was just heating, cooking and driving under a winter inversion.
+The four worst hours of Jammu's entire year were all on Diwali night, 8 pm to midnight, between 561 and 680 µg/m³. Nothing else this year came close to 680. But look at what comes straight after them. The fifth worst hour of the year was 7 pm on 18 January, at 513, not far below Diwali's fourth, followed by 8 pm that same night at 490 and 7 pm the next day at 407. Of the 30 worst hours, only 7 were Diwali, and most of the rest are ordinary January and February evenings, with no crackers anywhere, when the city was just heating, cooking and driving under a winter inversion.
 
-So both of these are true, and they don't cancel out. Diwali night was the worst air of the year, hour for hour, and it was also about half a percent of the year's total. A cracker ban would take the top of the chart off. It wouldn't touch the 23 other hours on it, or the thousands of hours below them.
+So both of these are true, and they don't cancel out. Diwali night was the worst air of the year, hour for hour, and it was also about two thirds of a percent of the year's total. A cracker ban would take the top of the chart off. It wouldn't touch the 23 other hours on it, or the thousands of hours below them.
 
-The flip side of that argument, that a few hours at 700 are worse than months at 200, gets the trade the wrong way round, because months at 200 is what we already have. Jammu was within the WHO's daily guideline on 2 of the 292 days we recorded, and over India's own, much looser, limit on 94 of them.
+The flip side of that argument, that a few hours at 700 are worse than months at 200, gets the trade the wrong way round, because months at 200 is what we already have. Jammu was within the WHO's daily guideline on 2 of the 292 days we recorded, and over India's own, much looser, limit on 86 of them.
 
 ### "Other countries burn fireworks too, and nobody complains"
 
 They do, and somebody actually measured it. Researchers at NOAA looked at 315 monitoring stations across the US from 1999 to 2013 and found that the 24 hours starting at 8 pm on the Fourth of July averaged 42% more PM2.5 than the days around it ([Seidel and Birnbaum, 2015](https://www.arl.noaa.gov/documents/JournalPDFs/Seidel&BirnbaumAE2015.pdf)). Next to one fireworks display, it was 370% more. And it was back to normal by noon the next day.
 
-So yes, fireworks do the same thing everywhere. The difference is what they land on. In the US, the national average went up by about 5 µg/m³, which (if 5 is 42% of it) means it started from about 12. In Jammu, Diwali night went up by about 196 µg/m³, from a starting point that was already "Very unhealthy". Same physics, very different baseline, which is pretty much the whole point of this post.
+So yes, fireworks do the same thing everywhere. The difference is what they land on. In the US, the national average went up by about 5 µg/m³, which (if 5 is 42% of it) means it started from about 12. In Jammu, Diwali night went up by about 223 µg/m³, from a starting point that was already "Unhealthy". Same physics, very different baseline, which is pretty much the whole point of this post.
 
 ## What those few hours do anyway
 
@@ -362,9 +362,9 @@ Start with what an ordinary day looks like. Here's Jammu, hour by hour, averaged
 
 <div class="chart" data-src="/data/everyone-had-an-aqi/jammu-hours.json"></div>
 
-The cleanest part of the day is early afternoon, around 57 µg/m³, when the sun has warmed the ground and the air is mixing upwards. There's a smaller bump in the morning (83 around 8 am), and then the big one, from 6 pm onwards, peaking at 115 between 7 and 9 pm. That evening peak is everything at once. Rush hour, cooking, rubbish fires, the first heaters, all poured into air that's cooling and getting trapped under the lid.
+The cleanest part of the day is mid-afternoon, around 52 µg/m³, when the sun has warmed the ground and the air is mixing upwards. There's a smaller bump in the morning (75 between 7 and 9 am), and then the big one, from 6 pm onwards, peaking at 106 between 8 and 9 pm. That evening peak is everything at once. Rush hour, cooking, rubbish fires, the first heaters, all poured into air that's cooling and getting trapped under the lid.
 
-I expected Sundays to be cleaner, since there's less commuting. They weren't. Over the seven Sundays in that window, the average was 82 µg/m³, against 76 for the rest of the week, and Sunday evenings were the worst of all (125 between 8 and 9 pm). Seven Sundays isn't a lot, so I wouldn't hang anything on the exact numbers, but it does say that Jammu's evening air isn't only office traffic. Whatever people do at home in the evening (cooking, burning leaves and rubbish, going out, visiting family by car) is a big part of it.
+I expected Sundays to be cleaner, since there's less commuting. They weren't. Over the seven Sundays in that window, the average was 74 µg/m³, against 70 for the rest of the week, and Sunday evenings were the worst of all (116 between 8 and 9 pm). Seven Sundays isn't a lot, so I wouldn't hang anything on the exact numbers, but it does say that Jammu's evening air isn't only office traffic. Whatever people do at home in the evening (cooking, burning leaves and rubbish, going out, visiting family by car) is a big part of it.
 
 Then there's the bigger picture. J&K has 26.6 lakh registered vehicles and adds about 20,000 every month, and 1.79 lakh were registered in 2025 alone ([Down To Earth](https://www.downtoearth.org.in/amp/story/air/india-on-e-wheels-air-pollution-is-rising-in-the-mountains-of-jammu-and-kashmir-mainly-due-to-the-transport-sector-say-experts)). In the same article, the emergency department at Srinagar's chest disease hospital went from 18,672 visits in 2017-18 to 32,133 in 2023-24.
 
