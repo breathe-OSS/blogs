@@ -99,7 +99,7 @@ export function layout(options: LayoutOptions): string {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght,wdth,ROND@6..144,100..1000,25..151,0..100&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap"
       rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/styles.css?v=${options.version}" />
     <script type="module" src="/assets/js/main.js?v=${options.version}"></script>

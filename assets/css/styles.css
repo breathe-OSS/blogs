@@ -34,6 +34,7 @@
   --inverse-on-surface: #2e3036;
   --inverse-primary: #415f91;
   --nav-active-bg: var(--secondary-container);
+  --font-plain: 'Google Sans Flex', 'Roboto', system-ui, sans-serif;
   --shape-corner-large-increased: 20px;
   --shape-corner-extra-large-increased: 32px;
   --shape-corner-extra-extra-large: 48px;
@@ -243,7 +244,7 @@ body {
   flex-direction: column;
   background-color: var(--background);
   color: var(--on-surface);
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-plain);
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -1200,7 +1201,7 @@ img {
   background: var(--surface-container-high);
   color: var(--on-surface-variant);
   font:
-    500 12px 'Roboto',
+    500 12px 'Google Sans Flex', 'Roboto',
     sans-serif;
   cursor: pointer;
   opacity: 0;
@@ -1443,7 +1444,7 @@ a.archive-row:hover .archive-title {
   border: none;
   border-radius: 20px;
   font:
-    500 14px 'Roboto',
+    500 14px 'Google Sans Flex', 'Roboto',
     sans-serif;
   cursor: pointer;
   transition:
@@ -2022,7 +2023,7 @@ a.archive-row:hover .archive-title {
   background: none;
   color: var(--on-surface-variant);
   font:
-    500 13px 'Roboto',
+    500 13px 'Google Sans Flex', 'Roboto',
     sans-serif;
   cursor: pointer;
   transition:
