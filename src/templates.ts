@@ -87,7 +87,7 @@ export function layout(options: LayoutOptions): string {
     <meta name="twitter:title" content="${esc(options.title)}" />
     <meta name="twitter:description" content="${esc(options.description)}" />
     <meta name="twitter:image" content="${image}" />
-    <meta name="theme-color" content="#a8c7fa" />
+    <meta name="theme-color" content="#111318" />
     <link rel="icon" type="image/webp" href="/images/web-icon.webp" />
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
     <link rel="alternate" type="application/rss+xml" title="${SITE.title}" href="/rss.xml" />
